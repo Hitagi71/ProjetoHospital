@@ -67,7 +67,7 @@
   footer {
       width: 100%;
       height: 50px;
-      background-color: #343a40;
+      background-color: red;
       bottom: 0px;
       position: fixed;
   }
@@ -83,11 +83,7 @@
   }
   
   .size {
-<<<<<<< HEAD
-      font-size: 38px;
-=======
       font-size: 30px;
->>>>>>> acf6a03af6fb2486620d2bf3c527b8753db98899
       color: black
   }
   
