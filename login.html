@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/simple-sidebar.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css"  />
+    <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
+
 <body>
     <div class="container">
         <div class="row mt-5">
@@ -17,14 +19,14 @@
                 <h1 class="text-center titulo">Login</h1>
                 <form class="ml-5 mr-5 needs-validation form rounded" novalidate>
                     <div class="form-group mt-5">
-                      <label>Email</label>
-                      <input type="email" class="form-control" required>
+                        <label>Email</label>
+                        <input type="email" class="form-control" required>
                     </div>
                     <div class="form-group">
-                      <label>Senha</label>
-                      <input type="password" class="form-control" required>
+                        <label>Senha</label>
+                        <input type="password" class="form-control" required>
                     </div>
-                    <p>Não tem uma conta?&nbsp;&nbsp;<a href="#">Cadastre-se</a></p>
+                    <p>Não tem uma conta OIOIOIOII?&nbsp;&nbsp;<a href="#">Cadastre-se</a></p>
                     <br/>
                     <div class="text-center">
                         <input type="submit" value="Entrar" class="btn btn-primary btn-lg mt-5 rounded">
@@ -34,7 +36,7 @@
         </div>
     </div>
     <footer class="text-center text-white">
-        <div class="mt-3"> 
+        <div class="mt-3">
             &copy;Todos Direitos reservados
         </div>
     </footer>
@@ -42,16 +44,15 @@
     <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="js/bootstrap-notify.min.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
-
         (function() {
-            window.addEventListener('load', function() {  
+            window.addEventListener('load', function() {
                 var forms = document.getElementsByClassName('needs-validation');
                 var validation = Array.prototype.filter.call(forms, function(form) {
                     form.addEventListener('submit', function(event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
-                            messageBox('danger','Preencha todos os campos')
+                            messageBox('danger', 'Preencha todos os campos')
                         }
                         form.classList.add('was-validated');
                     }, false);
@@ -63,7 +64,7 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-        
+
         function messageBox(type, message) {
             $.notify({
                 message: message
@@ -75,7 +76,7 @@
                 },
             });
         }
-
     </script>
 </body>
+
 </html>
