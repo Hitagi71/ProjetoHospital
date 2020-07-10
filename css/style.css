@@ -83,7 +83,11 @@
   }
   
   .size {
+<<<<<<< HEAD
+      font-size: 38px;
+=======
       font-size: 30px;
+>>>>>>> acf6a03af6fb2486620d2bf3c527b8753db98899
       color: black
   }
   /*.lado img {
