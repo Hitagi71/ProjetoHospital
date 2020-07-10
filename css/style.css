@@ -86,6 +86,11 @@
       font-size: 30px;
       color: black
   }
+  /*.lado img {
+      width: 500px;
+      margin-left: -120px;
+      margin-right: -45px;
+  }*/
   
   .size1 {
       font-size: 50px;
