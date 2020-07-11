@@ -273,3 +273,11 @@
       margin-top: 100px;
       height: 50px;
   }
+
+.cursor {
+    cursor: pointer;
+}
+
+.cursor:hover {
+    color: green;
+}

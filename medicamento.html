@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
-
 <body>
     <div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
@@ -65,38 +64,31 @@
             <nav class="border-bottom">
                 <div class="menu">
                     <button class="btn btn-primary mb-4" id="menu-toggle">
-              <i class="material-icons">menu</i>
-            </button>
+                        <i class="material-icons">menu</i>
+                    </button>
                 </div>
                 <ul>
                     <li>
-                        <a href="#"><i class="material-icons size">chat_bubble_outline</i></a
-              >
-            </li>
-            <li>
-              <a href="#"
-                ><i class="material-icons size">notifications_none</i></a
-              >
-              <span class="badge">3</span>
-            </li>
-          </ul>
-          <div class="search">
-            <form>
-              <div class="input-group mb-2">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Procurar"
-                />
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <i class="material-icons">search</i>
-                  </div>
+                        <a href="#"><i class="material-icons size">chat_bubble_outline</i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="material-icons size">notifications_none</i></a>
+                        <span class="badge">3</span>
+                    </li>
+                </ul>
+                <div class="search">
+                    <form>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" placeholder="Procurar"/>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="material-icons">search</i>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-            </form>
-          </div>
-        </nav>
+            </nav>
             <div class="container">
                 <div class="row">
                     <div class="col-12 mt-5">
@@ -118,7 +110,6 @@
                                       </div>
                                 </div>
                             </div>
-                        </fieldset>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-4">
@@ -127,20 +118,10 @@
                                     </div>
                                     <div class="col-4 d-inline">
                                         <label>Tipo do medicamento:</label>
-                                        <select class="form-control" name="txtMedicamento" id="txtMedicamento" id="exampleFormControlSelect1">
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                          <option>5</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-4 mt-4">
-                                        <button type="button" class="btn btn-primary btn-lg rounded-circle">+</button>
+                                        <input type="text" name="txtTipoMedicamento" id="txtTipoMedicamento" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                   
                         </form>
                         <table class="table">
                             <thead class="thead-dark">
@@ -227,7 +208,7 @@
                 },
             });
         }
-
+        
     </script>
 </body>
 </html>
