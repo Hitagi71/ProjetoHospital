@@ -262,3 +262,7 @@
       margin-top: 20px;
       justify-content: space-between;
   }
+
+  .imgSize{
+    height: 250px;
+  }
