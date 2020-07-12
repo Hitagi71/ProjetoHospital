@@ -1,4 +1,4 @@
-drop database if exists bd_hospital;
+drop database if exists banco_hospital;
 create database banco_hospital;
 use banco_hospital;
 
@@ -46,6 +46,14 @@ create table CARGO(
 	cargo_valor_salario int not null
 );
 
+create table PESSOA(
+	pessoa_id int not null auto_increment primary key,
+	pessoa_nome varchar(80),
+	pessoa_rg varchar(15),
+	pessoa_cpf varchar(18),
+	pessoa_sexo varchar(15),
+	pessoa_data_nasc date
+);
 
 create table ENDERECO(
 	endereco_id int not null auto_increment primary key,
@@ -55,19 +63,10 @@ create table ENDERECO(
 	endereco_complemento varchar(50),
 	endereco_cep varchar(15),
 	endereco_estado varchar(15),
-	endereco_cidade varchar(20)
+	endereco_cidade varchar(20),
+	endereco_pessoa int not null,
+	foreign key (endereco_pessoa) references PESSOA (pessoa_id)
 );
-create table PESSOA(
-	pessoa_id int not null auto_increment primary key,
-	pessoa_nome varchar(80),
-	pessoa_rg varchar(15),
-	pessoa_cpf varchar(18),
-	pessoa_sexo varchar(15),
-	pessoa_data_nasc date,
-	pessoa_endereco int not null,
-	foreign key (pessoa_endereco) references ENDERECO(endereco_id)
-);
-
 
 create table TIPO_TELEFONE(
 	tipo_tel int not null auto_increment primary key,
