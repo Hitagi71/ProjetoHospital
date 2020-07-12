@@ -24,15 +24,15 @@
                         <li class="list-group-item"></li>
                         <li class="list-group-item">
                             <i class="material-icons size1">person_add</i>
-                            <a class="links" href="pacientes.html" target="_self">
+                            <a class="links" href="pacientes.php" target="_self">
                                 <h1 class="nomesLista">
-                                    <b>Cadastros</b>
+                                    <b>Pacientes</b>
                                 </h1>
                             </a>
                         </li>
                         <li class="list-group-item">
                             <i class="material-icons size1">healing</i>
-                            <a class="links" href="medicamento.html" target="_self">
+                            <a class="links" href="medicamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Medicamentos</b>
                                 </h1>
@@ -41,7 +41,7 @@
 
                         <li class="list-group-item">
                             <i class="material-icons size1">assignment</i>
-                            <a class="links" href="agendamento.html" target="_self">
+                            <a class="links" href="agendamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Agendamentos</b>
                                 </h1>
@@ -49,7 +49,7 @@
                         </li>
                         <li class="list-group-item">
                             <i class="material-icons size1">card_travel</i>
-                            <a class="links" href="equipamento.html" target="_self">
+                            <a class="links" href="equipamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Equipamentos</b>
                                 </h1>
