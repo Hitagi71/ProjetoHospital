@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicamento</title>
-    <h1>aaaSSSSSSS<h1>
     <meta name="author" content="dede">
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -26,7 +25,7 @@
                         <li class="list-group-item"></li>
                         <li class="list-group-item">
                             <i class="material-icons size1">person_add</i>
-                            <a class="links" href="cadastros.html" target="_self">
+                            <a class="links" href="cadastros.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Cadastros</b>
                                 </h1>
@@ -34,7 +33,7 @@
                         </li>
                         <li class="list-group-item">
                             <i class="material-icons size1">healing</i>
-                            <a class="links" href="medicamento.html" target="_self">
+                            <a class="links" href="medicamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Medicamentos</b>
                                 </h1>
@@ -43,7 +42,7 @@
 
                         <li class="list-group-item">
                             <i class="material-icons size1">assignment</i>
-                            <a class="links" href="agendamento.html" target="_self">
+                            <a class="links" href="agendamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Agendamentos</b>
                                 </h1>
@@ -51,7 +50,7 @@
                         </li>
                         <li class="list-group-item">
                             <i class="material-icons size1">card_travel</i>
-                            <a class="links" href="equipamento.html" target="_self">
+                            <a class="links" href="equipamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Equipamentos</b>
                                 </h1>
