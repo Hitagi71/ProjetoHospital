@@ -27,7 +27,7 @@
                             <i class="material-icons size1">person_add</i>
                             <a class="links" href="pacientes.php" target="_self">
                                 <h1 class="nomesLista">
-                                    <b>Cadastros </b>
+                                    <b>Pacientes </b>
                                 </h1>
                             </a>
                         </li>
