@@ -101,22 +101,25 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <legend>Cadastro de Sala</legend>
-                        <form>
+                        <form  class="needs-validation" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Numero:</label>
-                                        <input type="number" name="txtNome" id="txtNome" class="form-control">
+                                        <input type="number" name="txtNome" id="txtNome" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Ocupada:</label>
-                                        <input type="text" name="txtLote" id="txtLote" class="form-control">
+                                        <input type="text" name="txtLote" id="txtLote" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Tipo da sala:</label>
-                                        <input type="text" name="txtTarja" id="txtTarja" class="form-control">
+                                        <input type="text" name="txtTarja" id="txtTarja" class="form-control" required>
                                       </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
                         <table class="table">

@@ -18,7 +18,7 @@
             <div class="list-group list-group-flush">
                 <div id="nomeAdmin">
                     <img id="adminFoto" src="imgs/homura.jpg" class="rounded-circle" alt="FotoAdmin" />
-                    <h1><b>Homura my love</b></h1>
+                    <h1><b>Homura</b></h1>
                 </div>
                 <div id="listas">
                     <ul class="list-group list-group-flush">
@@ -94,24 +94,24 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <h1>Agendamento</h1>
-                        <form>
+                        <form class="needs-validation" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <label for="">Data:</label>
-                                        <input type="date" name="txtData" id="txtData" class="form-control">
+                                        <input type="date" name="txtData" id="txtData" class="form-control" required>
                                     </div>
                                     <div class="col-2">
                                         <label for="">Hora:</label>
-                                        <input type="time" name="txtHora" id="txtHora" class="form-control">
+                                        <input type="time" name="txtHora" id="txtHora" class="form-control" required>
                                     </div>
                                     <div class="col-3">
                                         <label for="">Tipo de Agendamento:</label>
-                                        <input type="text" name="txtTipoAgendamento" id="txtTipoAgendamento" class="form-control">
+                                        <input type="text" name="txtTipoAgendamento" id="txtTipoAgendamento" class="form-control" required>
                                     </div>
                                     <div class="col">
                                         <label for="">Funcionario:</label>
-                                        <input type="text" name="txtFuncionario" id="txtFuncionario" class="form-control">
+                                        <input type="text" name="txtFuncionario" id="txtFuncionario" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -119,17 +119,20 @@
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label for="">Equipamento:</label>
-                                        <input type="text" name="txtEquipamento" id="txtEquipamento" class="form-control">
+                                        <input type="text" name="txtEquipamento" id="txtEquipamento" class="form-control" required>
                                     </div>
                                     <div class="col-4">
                                         <label>Paciente:</label>
-                                        <input type="text" name="txtPaciente" id="txtPaciente" class="form-control">
+                                        <input type="text" name="txtPaciente" id="txtPaciente" class="form-control" required>
                                     </div>
                                     <div class="col">
                                         <label>Entrada e saida:</label>
-                                        <input type="text" name="txtEntradaSaida" id="txtEntradaSaida" class="form-control">
+                                        <input type="text" name="txtEntradaSaida" id="txtEntradaSaida" class="form-control" required>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
                         <table class="table">

@@ -100,20 +100,20 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <h1>Cadastro de Equipamento</h1>
-                        <form>
+                        <form class="needs-validation" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Nome:</label>
-                                        <input type="text" name="txtNome" id="txtNome" class="form-control">
+                                        <input type="text" name="txtNome" id="txtNome" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Descrição:</label>
-                                        <input type="text" name="txtDescricao"id="txtDescricao" class="form-control">
+                                        <input type="text" name="txtDescricao"id="txtDescricao" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Marca:</label>
-                                        <input type="text" name="txtMarca" id="txtMarca" class="form-control">
+                                        <input type="text" name="txtMarca" id="txtMarca" class="form-control" required>
                                       </div>  
                                 </div>
                             </div>
@@ -121,22 +121,16 @@
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label for="">Estado:</label>
-                                        <input type="text" name="txtEstado" id="txtEstado" class="form-control">
+                                        <input type="text" name="txtEstado" id="txtEstado" class="form-control" required>
                                     </div>
                                     <div class="col-3 d-inline">
                                         <label>Tipo Equipamento</label>
-                                        <select class="form-control" name="txtEquipamento" id="txtEquipamento" id="exampleFormControlSelect1">
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                          <option>5</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-4 mt-4">
-                                        <button type="button" class="btn btn-primary btn-lg rounded-circle">+</button>
+                                        <input type="text" name="txtEstado" id="txtEstado" class="form-control" required>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
                         <table class="table">

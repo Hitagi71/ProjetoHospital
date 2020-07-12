@@ -279,19 +279,8 @@
                 $("#wrapper").toggleClass("toggled");
             });
 
-            function messageBox(type, message) {
-                $.notify({
-                    message: message
-                }, {
-                    type: type,
-                    placement: {
-                        from: "top",
-                        align: "center"
-                    },
-                });
-            }
-
-            $("#cep").change(function(){
+            
+            $("#cep").on("input",function(){
                 $.ajax({
                     url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
                     dataType: 'json',

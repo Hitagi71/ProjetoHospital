@@ -93,20 +93,20 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <legend>Cadastro de Medicamentos</legend>
-                        <form>
+                        <form class="needs-validation" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Nome:</label>
-                                        <input type="text" name="txtNome" id="txtNome" class="form-control">
+                                        <input type="text" name="txtNome" id="txtNome" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Lote:</label>
-                                        <input type="text" name="txtLote" id="txtLote" class="form-control">
+                                        <input type="text" name="txtLote" id="txtLote" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Tarja:</label>
-                                        <input type="text" name="txtTarja" id="txtTarja" class="form-control">
+                                        <input type="text" name="txtTarja" id="txtTarja" class="form-control" required>
                                       </div>
                                 </div>
                             </div>
@@ -114,13 +114,16 @@
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label for="">Data de validade:</label>
-                                        <input type="date" name="txtData" id="txtData" class="form-control">
+                                        <input type="date" name="txtData" id="txtData" class="form-control" required>
                                     </div>
                                     <div class="col-4 d-inline">
                                         <label>Tipo do medicamento:</label>
-                                        <input type="text" name="txtTipoMedicamento" id="txtTipoMedicamento" class="form-control">
+                                        <input type="text" name="txtTipoMedicamento" id="txtTipoMedicamento" class="form-control" required>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
                         <table class="table">

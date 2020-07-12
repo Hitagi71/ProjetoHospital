@@ -1,4 +1,6 @@
 
+
+
 function scroll_to_class(element_class, removed_height) {
 	var scroll_to = $(element_class).offset().top - removed_height;
 	if($(window).scrollTop() != scroll_to) {
@@ -50,8 +52,36 @@ jQuery(document).ready(function() {
     	var current_active_step = $(this).parents('.f1').find('.f1-step.active');
     	var progress_line = $(this).parents('.f1').find('.f1-progress-line');
     	
-   
-    	
+		let erro=false;
+		// fields validation
+    	parent_fieldset.find('input[type="text"], input[type="password"], textarea,input[type="date"]').each(function() {
+    		if( $(this).val() == "" ) {
+    			$(this).addClass('input-error');
+				next_step = false;
+				erro=true;
+    		}
+    		else {
+    			$(this).removeClass('input-error');
+    		}
+		});
+		
+		if(erro){
+			$.notify({
+				// options
+				message: 'Preencha todos os campos' 
+			},{
+				// settings
+				type: 'danger',
+				z_index: 9999,
+				placement: {
+					from: "top",
+					align: "center"
+				},
+			});
+		}
+
+
+		// fields validation
     	if( next_step ) {
     		parent_fieldset.fadeOut(400, function() {
     			// change icons
