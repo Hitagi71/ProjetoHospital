@@ -397,7 +397,7 @@
         }else{
 
             echo('<script> window.alert("Preencha todos os campos");
-                    window.location="cadastro.php"; </script>');
+                    window.location="pacientes.php"; </script>');
         }
     }
 ?>
