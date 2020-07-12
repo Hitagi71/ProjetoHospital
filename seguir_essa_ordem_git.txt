@@ -1,0 +1,13 @@
+entrar na pasta
+
+git init
+
+git add .
+
+git pull origin master
+
+git pull
+
+git commit -m "mensagem"
+
+git push 
