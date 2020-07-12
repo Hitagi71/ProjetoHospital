@@ -114,7 +114,8 @@ jQuery(document).ready(function() {
 			scroll_to_class( $('.f1'), 20 );
     	});
     });
-    
+	
+	let erro1=false;
     // submit
     $('.f1').on('submit', function(e) {
     	
@@ -122,13 +123,29 @@ jQuery(document).ready(function() {
     	$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
     		if( $(this).val() == "" ) {
     			e.preventDefault();
-    			$(this).addClass('input-error');
+				$(this).addClass('input-error');
+				erro1=true;
     		}
     		else {
     			$(this).removeClass('input-error');
     		}
     	});
-    	// fields validation
+		
+		if(erro1){
+			$.notify({
+				// options
+				message: 'Preencha todos os campos' 
+			},{
+				// settings
+				type: 'danger',
+				z_index: 9999,
+				placement: {
+					from: "top",
+					align: "center"
+				},
+			});
+		}
+
     	
     });
     
