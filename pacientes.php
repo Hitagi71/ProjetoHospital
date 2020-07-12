@@ -20,7 +20,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-body text-center">
-                    <form role="form" action="" method="post" class="f1">
+                    <form role="form" action="#" method="POST" class="f1">
                         <h3>Cadastro de Paciente</h3>
                         <p>Preencha suas informações</p>
                         <div class="f1-steps">
@@ -41,32 +41,38 @@
                         <fieldset>
                             <h4>Insira as informações do paciente:</h4>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nome">
+                                <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="Nome">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="RG" data-mask="00000-000" >
+                                <input type="text" id="txtRG" name="txtRG" class="form-control" placeholder="RG" data-mask="00000-000" >
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="CPF" data-mask="000.000.000-00" data-mask-reverse="true" />
+                                <input type="text" id="txtCpf" name="txtCpf" class="form-control" placeholder="CPF" data-mask="000.000.000-00" data-mask-reverse="true" />
                             </div>
                             <div class="form-group">
                                 Sexo:
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <input id="txtSexo" name="txtSexo" class="form-check-input" type="radio"  value="Masculino" checked>
                                     <label class="form-check-label" for="exampleRadios1">
                                      Masculino
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <input id="txtSexo" name="txtSexo" class="form-check-input" type="radio"  value="Feminino">
                                     <label class="form-check-label" for="exampleRadios2">
                                      Feminino
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="txtSexo" name="txtSexo" class="form-check-input" type="radio"  value="Androgeno">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                     Andrógeno
                                     </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="f1-about-yourself">Data de nascimento</label>
-                                <input type="date" class="form-control" placeholder="About yourself..." />
+                                <input type="date" id="txtNiver" name="txtNiver" class="form-control" placeholder="About yourself..." />
                             </div>
                             <div class="f1-buttons">
                                 <button type="button" class="btn btn-next">Próximo</button>
@@ -76,25 +82,25 @@
                         <fieldset>
                             <h4>Insira o endereço do paciente:</h4>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="CEP" id="cep" data-mask="00000-000" />
+                                <input type="text" id="txtCep" name="txtCep" class="form-control" placeholder="CEP" data-mask="00000-000" />
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Rua" id="logradouro">
+                                <input type="text" id="txtLogradoro" name="txtLogradouro" class="form-control" placeholder="Rua">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Numero">
+                                <input type="text" id="txtNum" name="txtNum" class="form-control" placeholder="Numero">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Bairro" id="bairro"/>
+                                <input type="text" id="txtBairro" name="txtBairro" class="form-control" placeholder="Bairro"/>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Complemento" id="complemento"/>
+                                <input type="text" id="txtComplemento" name="txtComplemento" class="form-control" placeholder="Complemento"/>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Estado" id="uf"/>
+                                <input type="text" id="txtUF" name="txtUF" class="form-control" placeholder="Estado"/>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Cidade" id="cidade"/>
+                                <input type="text" id="txtCidade" name="txtCidade" class="form-control" placeholder="Cidade"/>
                             </div>
                             
                             <div class="f1-buttons">
@@ -106,11 +112,11 @@
                         <fieldset>
                             <h4>Digite o plano de saude do paciene:</h4>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Plano de saude" />
+                                <input type="text" id="txtPlano" name="txtPlano" class="form-control" placeholder="Plano de saude" />
                             </div>
                             <div class="f1-buttons">
                                 <button type="button" class="btn btn-previous">Anterior</button>
-                                <button type="submit" class="btn btn-submit">Cadastrar</button>
+                                <button type="submit" class="btn btn-submit" name="cadastrar">Cadastrar</button>
                             </div>
                         </fieldset>
                     </form>
@@ -300,5 +306,101 @@
                 });
             });
         </script>
+
+<?php
+    include('conexao.php');
+
+    if(isset($_POST['cadastrar']))
+    {
+        $nome=ucwords(strtolower(trim($_POST['txtNome'])));
+        $rg=$_POST['txtRg'];
+        $cpf=$_POST['txtCpf'];
+        $sexo=$_POST['txtSexo'];
+        $niver=$_POST['txtNiver'];
+        $cep=trim($_POST['txtCep']);
+        $logradouro=ucwords(strtolower($_POST['txtLogradouro']));
+        $numero=$_POST['txtNum'];
+        $bairro=$_POST['txtBairro'];
+        $complemento=$_POST['txtComplemento'];
+        $estado=$_POST['txtUF'];
+        $cidade=$_POST['txtCidade'];
+        $plano_saude=$_POST['txtPlano'];
+
+        if(!empty($nome) && !empty($rg) && !empty($cpf) && !empty($sexo) && !empty($niver) && !empty($cep) 
+        && !empty($logradouro) && !empty($numero)&& !empty($bairro) && !empty($complemento) && !empty($estado) 
+        && !empty($cidade) && !empty($plano) )
+		{
+            $sql_verificar=('select * from PESSOA where pessoa_rg="'.$rg.'" or pessoa_cpf="'.$cpf.'";');
+
+            $verificar=mysqli_query($conexao,$sql_verificar);
+
+            $quant_registros=mysqli_num_rows($verificar);
+
+
+            if($quant_registros>=1)
+            {
+
+                echo('<script> window.alert("Email e/ou CPF já cadastrado(s) "); 
+                    window.location="pacientes.php"; </script>');
+
+            }else{
+
+                $sql_inserir=('
+                insert into PESSOA ( 
+                pessoa_nome,
+                pessoa_rg,
+                pessoa_cpf,
+                pessoa_sexo,
+                pessoa_data_nasc
+
+                ) values (
+                "'.$nome.'",
+                "'.$rg.'",
+                "'.$cpf.'",
+                "'.$sexo.'",
+                "'.$nascimento.'");');     
+
+                mysqli_query($conexao,$sql_inserir);
+                
+                $sql_inserir2=('
+                insert into ENDERECO ( 
+                endereco_rua,
+                endereco_numero,
+                endereco_bairro,
+                endereco_complemento,
+                endereco_cep,
+                esdereco_estado,
+                endereco_cidade
+
+                ) values (
+                "'.$logradouro.'",
+                "'.$numero.'",
+                "'.$bairro.'",
+                "'.$complemento.'",
+                "'.$cep.'",
+                "'.$estado.'",
+                "'.$cidade.'");');     
+
+                mysqli_query($conexao,$sql_inserir2);
+
+                $sql_inserir3=('
+                insert into PLANO_SAUDE ( 
+                plano_saude_nome
+                ) values (
+                "'.$plano_saude.'");');     
+
+                mysqli_query($conexao,$sql_inserir3);
+
+                echo('<script> window.alert("Cadastrado com sucesso"); 
+                        window.location="login.php"; </script>');
+            }
+        }else{
+
+            echo('<script> window.alert("Preencha todos os campos");
+                    window.location="cadastro.php"; </script>');
+        }
+    }
+?>
+
 </body>
 </html>
