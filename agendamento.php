@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <h1>Agendamento</h1>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-3">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
                         <table class="table">
@@ -228,5 +228,68 @@
         }
     </script>
 </body>
+<?php
+    include('conexao.php');
 
+    if(isset($_POST['cadastrar']))
+    {
+        $data=ucwords(strtolower(trim($_POST['txtData'])));
+        $hora=$_POST['txtHora'];
+        $tipoAgend=$_POST['txtTipoAgendamento'];
+        $funcionario=$_POST['txtFuncionario'];
+        $equip=$_POST['txtEquipamento'];
+        $paciente=$_POST['txtPaciente'];
+        $EntradaSaida=$_POST['txtEntradaSaida'];
+
+        $sql_verificar=('select * from agendamento where agend_data="'.$data.'" and agend_hora="'.$hora.'" and agend_paciente="'.$paciente.'";');
+
+        $verificar=mysqli_query($conexao,$sql_verificar);
+
+        $quant_registros=mysqli_num_rows($verificar);
+
+
+        if($quant_registros>=1)
+        {
+
+            echo('<script> window.alert("Agendamento já realizado"); 
+                window.location="agendamento.php"; </script>');
+
+        }else{
+
+            $sql_inserir=('
+            insert into tipo_agend ( 
+            tipo_agend_nome
+            ) values (
+            "'.$tipoAgend.'");');
+
+            mysqli_query($conexao,$sql_inserir);
+
+            $id=mysqli_insert_id($conexao);
+
+            $sql_inserir2=('
+            insert into agendamento ( 
+            agend_data,
+            agend_hora,
+            agend_tipo,
+            agend_func,
+            agend_equi,
+            agend_paciente,
+            agend_entr_sai
+            ) values (
+            "'.$data.'",
+            "'.$hora.'",
+            "'.$id.'",
+            "'.$funcionario.'",
+            "'.$equip.'",
+            "'.$paciente.'",
+            "'.$EntradaSaida.'");');     
+
+            mysqli_query($conexao,$sql_inserir2);
+
+            echo('<script> window.alert("Registrado com sucesso"); 
+                    window.location="agendamento.php"; </script>');
+        }
+    }
+
+?>
 </html>

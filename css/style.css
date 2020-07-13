@@ -282,3 +282,6 @@
     color: green;
 }
 
+.tipo_equipamento,.plano_saude,.tipo_medicamento,.cargo,.tipo_sala{
+    display: none;
+}
