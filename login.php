@@ -82,8 +82,7 @@
     </script>
 
     <?php
-        <?php
-
+    
         include('conexao.php');
 
 			session_start();
@@ -97,23 +96,23 @@
                 
 				$resul=mysqli_query($conexao,$sqlbuscar);
 				
-				if(mysqli_num_rows($resul)>0)
-				{
+			if(mysqli_num_rows($resul)>0)
+			{
                     $con=mysqli_fetch_array($resul);
 					
 					$_SESSION['user_id']=$con['funcionario_id'];
                     $_SESSION['user_email']=$con['funcionario_email'];					
 					
-				}else
-				{
+			}else
+			{
 					
-					echo('<script>
+				echo('<script>
 							window.alert("Usuário e/ou senha inválidos");
 							window.location=("login.php");
 						</script>');
-				}
 			}
-        ?>
+		}
+        
     ?>
 </body>
 
