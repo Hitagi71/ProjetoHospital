@@ -341,7 +341,6 @@
                 pessoa_cpf,
                 pessoa_sexo,
                 pessoa_data_nasc
-
                 ) values (
                 "'.$nome.'",
                 "'.$rg.'",
@@ -360,7 +359,6 @@
                 endereco_cep,
                 esdereco_estado,
                 endereco_cidade
-
                 ) values (
                 "'.$logradouro.'",
                 "'.$numero.'",
