@@ -105,8 +105,8 @@
                                 <option>Tipo da Sala</option>
                             </select>
                         </div>
+                        
                         <form class="needs-validation"  method="POST" action="#" novalidate>
-
                             <div class="tipo_equipamento" id="tipo_equipamento">
                                 <div class="form-group">
                                     <div class="form-row">
@@ -142,7 +142,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </form>
 
+                        <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="tipo_medicamento" id="tipo_medicamento">
                                 <div class="form-group">
                                     <div class="form-row">
@@ -178,7 +180,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </form>
 
+                        <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="plano_saude" id="plano_saude">
                                 <div class="form-group">
                                     <div class="form-row">
@@ -214,8 +218,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </form>
 
-
+                        <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="cargo" id="cargo">
                                 <div class="form-group">
                                     <div class="form-row">
@@ -259,7 +264,9 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                        </form>
+                        
+                        <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="tipo_sala" id="tipo_sala">
                                 <div class="form-group">
                                     <div class="form-row">
@@ -295,8 +302,8 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </form>
+                      
                     </div>
                 </div>
             </div>
@@ -311,6 +318,7 @@
     <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="js/bootstrap-notify.min.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
+        
         (function() {
             window.addEventListener('load', function() {
                 var forms = document.getElementsByClassName('needs-validation');
@@ -328,7 +336,6 @@
         })();
 
         function mudarForm(){
-            console.log($('#select').val())
             if($('#select').val()=="Tipo de Equipamento"){
                 document.getElementById("tipo_medicamento").style.display="none";
                 document.getElementById("plano_saude").style.display="none";
