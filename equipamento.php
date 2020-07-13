@@ -64,7 +64,7 @@
                         </li>
                         <li class="list-group-item">
                             <i class="material-icons size1">local_hospital</i>
-                            <a class="links" href="equipamento.php" target="_self">
+                            <a class="links" href="cadastroAux.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Auxiliares</b>
                                 </h1>
@@ -165,7 +165,6 @@
                                 <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-<<<<<<< HEAD
                         <table class="table">
                             <thead class="thead-dark">
                               <tr>
@@ -264,42 +263,6 @@
                               
                             </tbody>
                           </table>
-=======
-
-                        <?php
-                            include('conexao.php');
-
-                            $exibir=('select * from equipamento INNER JOIN tipo_equipamento on equipamento.equip_etipo=tipo_equipamento.tipo_equip_id;');	
-                            $result=mysqli_query($conexao,$exibir);
-
-                            echo('<table class="table">
-                                <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Marca</th>
-                                    <th scope="col">Estado</th>
-                                    <th scope="col">Tipo Equipamento</th>  
-                                </tr>
-                                </thead>');
-
-                            while($con=mysqli_fetch_array($result))
-			                {
-                                echo('<tbody<tr>
-                                    <th scope="row">'.$con['equip_id'].'</th>');
-                                    echo('<td>'.$con['equip_nome'].'</td>');
-                                    echo('<td>'.$con['equip_descricao'].'</td>');
-                                    echo('<td>'.$con['equip_marca'].'</td>');
-                                    echo('<td>'.$con['equip_estado'].'</td>');
-                                    echo('<td>'.$con['tipo_equip_nome'].'</td></tr></tbody>');
-      
-                            }
-                        
-                          echo('</table>');
-                        ?>
-
->>>>>>> b937c5f9b8708ba012fee5fdc90f0e69e7714535
                          
                     </div>
                 </div>

@@ -64,7 +64,7 @@
                         </li>
                         <li class="list-group-item">
                             <i class="material-icons size1">local_hospital</i>
-                            <a class="links" href="equipamento.php" target="_self">
+                            <a class="links" href="cadastroAux.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Auxiliares</b>
                                 </h1>
