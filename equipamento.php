@@ -12,21 +12,37 @@
 </head>
 
 <body>
-    <div class="d-flex toggled" id="wrapper">
+<div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 <div id="nomeAdmin">
-                    <img id="adminFoto" src="imgs/homura.jpg" class="rounded-circle" alt="FotoAdmin" />
-                    <h1><b>Homura</b></h1>
+                    <img id="adminFoto" src="imgs/doutor.jpg" class="rounded-circle" alt="FotoAdmin" />
+                    <h1><b>Dr.Alan</b></h1>
                 </div>
                 <div id="listas">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"></li>
                         <li class="list-group-item">
+                            <i class="material-icons size1">home</i>
+                            <a class="links" href="home.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Home</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
                             <i class="material-icons size1">person_add</i>
                             <a class="links" href="pacientes.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Pacientes</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">assignment_ind</i>
+                            <a class="links" href="funcionario.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Funcionários</b>
                                 </h1>
                             </a>
                         </li>
@@ -38,12 +54,27 @@
                                 </h1>
                             </a>
                         </li>
-
                         <li class="list-group-item">
                             <i class="material-icons size1">assignment</i>
                             <a class="links" href="agendamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Agendamentos</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">local_hospital</i>
+                            <a class="links" href="equipamento.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Auxiliares</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">weekend</i>
+                            <a class="links" href="sala.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Sala</b>
                                 </h1>
                             </a>
                         </li>
@@ -60,6 +91,7 @@
                 </div>
             </div>
         </div>
+
         <div id="page-content-wrapper">
             <nav class="border-bottom">
                 <div class="menu">
@@ -141,7 +173,9 @@
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Marca</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col">Tipo Equip</th>  
+                                <th scope="col">Tipo Equip</th>
+                                <th scope="col">Editar</th>  
+                                <th scope="col">Deletar</th>    
                               </tr>
                             </thead>
                             <tbody>
@@ -152,6 +186,14 @@
                                 <td>Diferenciado 1</td>
                                 <td>SP</td>
                                 <td>1</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                               </tr>
                               <tr>
                                 <th scope="row">2</th>
@@ -160,6 +202,14 @@
                                 <td>Diferenciado 2</td>
                                 <td>SP</td>
                                 <td>2</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                               </tr>
                               <tr>
                                 <th scope="row">3</th>
@@ -168,6 +218,14 @@
                                 <td>Diferenciado 3</td>
                                 <td>SP</td>
                                 <td>3</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                               </tr>
                               <tr>
                                 <th scope="row">4</th>
@@ -176,6 +234,14 @@
                                 <td>Diferenciado 4</td>
                                 <td>SP</td>
                                 <td>4</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                               </tr>
                               <tr>
                                 <th scope="row">5</th>
@@ -184,6 +250,14 @@
                                 <td>Diferenciado 5</td>
                                 <td>SP</td>
                                 <td>5</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                               </tr>
                               
                               
