@@ -85,7 +85,7 @@
                                 <input type="text" id="txtCep" name="txtCep" class="form-control" placeholder="CEP" data-mask="00000-000" />
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtLogradoro" name="txtLogradouro" class="form-control" placeholder="Rua">
+                                <input type="text" id="txtLogradouro" name="txtLogradouro" class="form-control" placeholder="Rua">
                             </div>
                             <div class="form-group">
                                 <input type="text" id="txtNum" name="txtNum" class="form-control" placeholder="Numero">
@@ -280,17 +280,16 @@
             });
 
             
-            $("#cep").on("input",function(){
+            $("#txtCep").keyup("input",function(){
                 $.ajax({
                     url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
                     dataType: 'json',
                     success: function(resposta){
-                        $("#logradouro").val(resposta.logradouro);
-                        $("#complemento").val(resposta.complemento);
-                        $("#bairro").val(resposta.bairro);
-                        $("#cidade").val(resposta.localidade);
-                        $("#uf").val(resposta.uf);
-                        $("#numero").focus();
+                        $("#txtLogradouro").val(resposta.logradouro);
+                        $("#txtComplemento").val(resposta.complemento);
+                        $("#txtBairro").val(resposta.bairro);
+                        $("#txtCidade").val(resposta.localidade);
+                        $("#txtUF").val(resposta.uf);
                     }
                 });
             });
