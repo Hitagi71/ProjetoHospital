@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Home</title>
+    <title>Equipamento</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -100,7 +100,7 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <h1>Cadastro de Equipamento</h1>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" method="POST" action="#" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
@@ -109,7 +109,7 @@
                                       </div>
                                       <div class="col">
                                         <label for="">Descrição:</label>
-                                        <input type="text" name="txtDescricao"id="txtDescricao" class="form-control" required>
+                                        <input type="text" name="txtDescricao" id="txtDescricao" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Marca:</label>
@@ -125,70 +125,48 @@
                                     </div>
                                     <div class="col-3 d-inline">
                                         <label>Tipo Equipamento</label>
-                                        <input type="text" name="txtEstado" id="txtEstado" class="form-control" required>
+                                        <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-                        <table class="table">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Descrição</th>
-                                <th scope="col">Marca</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Tipo Equip</th>  
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Ruanzinho</td>
-                                <td>Lenda</td>
-                                <td>Diferenciado 1</td>
-                                <td>SP</td>
-                                <td>1</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Vini</td>
-                                <td>Gado</td>
-                                <td>Diferenciado 2</td>
-                                <td>SP</td>
-                                <td>2</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Dedé</td>
-                                <td>Safado</td>
-                                <td>Diferenciado 3</td>
-                                <td>SP</td>
-                                <td>3</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">4</th>
-                                <td>Nunutty</td>
-                                <td>Psicopata</td>
-                                <td>Diferenciado 4</td>
-                                <td>SP</td>
-                                <td>4</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">5</th>
-                                <td>Tatalita</td>
-                                <td>Fofa</td>
-                                <td>Diferenciado 5</td>
-                                <td>SP</td>
-                                <td>5</td>
-                              </tr>
-                              
-                              
-                            </tbody>
-                          </table>
+
+                        <?php
+                            include('conexao.php');
+
+                            $exibir=('select * from equipamento INNER JOIN tipo_equipamento on equipamento.equip_etipo=tipo_equipamento.tipo_equip_id;');	
+                            $result=mysqli_query($conexao,$exibir);
+
+                            echo('<table class="table">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Tipo Equipamento</th>  
+                                </tr>
+                                </thead>');
+
+                            while($con=mysqli_fetch_array($result))
+			                {
+                                echo('<tbody<tr>
+                                    <th scope="row">'.$con['equip_id'].'</th>');
+                                    echo('<td>'.$con['equip_nome'].'</td>');
+                                    echo('<td>'.$con['equip_descricao'].'</td>');
+                                    echo('<td>'.$con['equip_marca'].'</td>');
+                                    echo('<td>'.$con['equip_estado'].'</td>');
+                                    echo('<td>'.$con['tipo_equip_nome'].'</td></tr></tbody>');
+      
+                            }
+                        
+                          echo('</table>');
+                        ?>
+
                          
                     </div>
                 </div>
@@ -239,5 +217,63 @@
         }
 
     </script>
+
+<?php
+    include('conexao.php');
+
+    if(isset($_POST['cadastrar']))
+    {
+        $nome=ucwords(strtolower(trim($_POST['txtNome'])));
+        $descricao=ucfirst(strtolower(trim($_POST['txtDescricao'])));
+        $marca=ucwords(strtolower(trim($_POST['txtMarca'])));
+        $estado=ucwords(strtolower(trim($_POST['txtEstado'])));
+        $tipo=ucfirst(strtolower(trim($_POST['txtTipo'])));
+
+        $sql_verificar=('select * from equipamento where equip_nome="'.$nome.'" and equip_descricao="'.$descricao.'";');
+
+        $verificar=mysqli_query($conexao,$sql_verificar);
+
+        $quant_registros=mysqli_num_rows($verificar);
+
+
+        if($quant_registros>=1)
+        {
+
+            echo('<script> window.alert("Equipamento já cadastrado."); 
+                window.location="equipamento.php"; </script>');
+
+        }else{
+
+            $sql_inserir=('
+            insert into tipo_equipamento ( 
+            tipo_equip_nome
+            ) values (
+            "'.$tipo.'");');     
+
+            mysqli_query($conexao,$sql_inserir);
+
+            $id=mysqli_insert_id($conexao);
+
+            $sql_inserir2=('
+            insert into equipamento ( 
+            equip_nome,
+            equip_descricao,
+            equip_marca,
+            equip_estado,
+            equip_etipo
+            ) values (
+            "'.$nome.'",
+            "'.$descricao.'",
+            "'.$marca.'",
+            "'.$estado.'",
+            "'.$id.'");');     
+
+            mysqli_query($conexao,$sql_inserir2);
+
+            echo('<script> window.alert("Inserido com sucesso"); 
+                    window.location="equipamento.php"; </script>');
+        }
+    }
+?>
 </body>
 </html>

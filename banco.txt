@@ -24,8 +24,8 @@ create table TIPO_SALA(
 
 create table SALA(
 	sala_id int not null auto_increment primary key,
-	sala_numero varchar(5),
-	sala_ocupada char(1),
+	sala_numero varchar(10),
+	sala_ocupada varchar(5),
 	sala_tipo int not null,
 	foreign key (sala_tipo) references TIPO_SALA(tipo_sala_id)
 );
@@ -97,8 +97,11 @@ create table PACIENTE(
 
 create table FUNCIONARIO(
 	funcionario_id int not null auto_increment primary key,
+	funcionario_nome varchar(50),
+	funcionario_email varchar(30),
+	funcionario_senha varchar(20),
 	funcionario_cargo int not null,
-	funcionario_cod int not null,
+	funcionario_cod int,
 	foreign key (funcionario_cargo) references CARGO(cargo_id),
 	foreign key (funcionario_cod) references PESSOA(pessoa_id)
 );
@@ -134,16 +137,12 @@ create table AGENDAMENTO(
 	agend_id int not null auto_increment primary key,
 	agend_data date,
 	agend_hora varchar(20),
+	agend_func varchar(50),
+	agend_equi varchar(10),
+	agend_paciente varchar(50),
+	agend_entr_sai varchar(20),
 	agend_tipo int not null,
-	agend_func int not null,
-	agend_equi_sala int not null,
-	agend_paciente int not null,
-	agend_entr_sai int not null,
-	foreign key (agend_tipo) references TIPO_AGEND(tipo_agend_id),
-	foreign key (agend_func) references FUNCIONARIO(funcionario_id),
-	foreign key (agend_equi_sala) references EQUI_SALA(equi_sala_id),
-	foreign key (agend_paciente) references PACIENTE(paciente_id),
-	foreign key (agend_entr_sai) references ENTRADA_SAIDA(entrada_saida_id)
+	foreign key (agend_tipo) references TIPO_AGEND(tipo_agend_id)
 );
 
 

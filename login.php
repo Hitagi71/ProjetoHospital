@@ -20,19 +20,19 @@
             </div>
             <div class="col-8 divForm  ">
                 <h1 class="text-center titulo">Login</h1>
-                <form class="ml-5 mr-5 needs-validation form rounded" novalidate>
+                <form class="ml-5 mr-5 needs-validation form rounded" method="POST" action="#" novalidate>
                     <div class="form-group mt-5">
                         <label>Email</label>
-                        <input type="email" class="form-control" required>
+                        <input type="email" id="txtEmail" name="txtEmail" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Senha</label>
-                        <input type="password" class="form-control" required>
+                        <input type="password" id="txtSenha" name="txtSenha" class="form-control" required>
                     </div>
-                    <p>Não tem uma conta?&nbsp;&nbsp;<a href="#">Cadastre-se</a></p>
+                    <p>Não tem uma conta?&nbsp;&nbsp;<a href="funcionario.php">Cadastre-se</a></p>
                     <br/>
                     <div class="text-center">
-                        <input type="submit" value="Entrar" class="btn btn-primary btn-lg mt-5 rounded">
+                        <input type="submit" name="entrar" value="Entrar" class="btn btn-primary btn-lg mt-5 rounded">
                     </div>
                 </form>
             </div>
@@ -80,6 +80,41 @@
             });
         }
     </script>
+
+    <?php
+        <?php
+
+        include('conexao.php');
+
+			session_start();
+			
+            if(isset($_POST['entrar']))
+			{
+				$email=strtolower(trim($_POST['txtEmail']));
+				$senha=strtolower(trim($_POST['txtSenha']));
+                
+				$sqlbuscar=('select * from funcionario where funcionario_email="'. $email .'" and funcionario_senha="'.$senha.'";');
+                
+				$resul=mysqli_query($conexao,$sqlbuscar);
+				
+				if(mysqli_num_rows($resul)>0)
+				{
+                    $con=mysqli_fetch_array($resul);
+					
+					$_SESSION['user_id']=$con['funcionario_id'];
+                    $_SESSION['user_email']=$con['funcionario_email'];					
+					
+				}else
+				{
+					
+					echo('<script>
+							window.alert("Usuário e/ou senha inválidos");
+							window.location=("login.php");
+						</script>');
+				}
+			}
+        ?>
+    ?>
 </body>
 
 </html>

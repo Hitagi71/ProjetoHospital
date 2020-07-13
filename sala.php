@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicamento</title>
+    <title>Sala</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/simple-sidebar.css">
@@ -101,57 +101,58 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <legend>Cadastro de Sala</legend>
-                        <form  class="needs-validation" novalidate>
+                        <form  class="needs-validation" method="POST" action="#" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Numero:</label>
-                                        <input type="number" name="txtNome" id="txtNome" class="form-control" required>
+                                        <input type="number" name="txtNumero" id="txtNumero" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Ocupada:</label>
-                                        <input type="text" name="txtLote" id="txtLote" class="form-control" required>
+                                        <input type="text" name="txtOcupada" id="txtOcupada" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Tipo da sala:</label>
-                                        <input type="text" name="txtTarja" id="txtTarja" class="form-control" required>
+                                        <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
                                       </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-                        <table class="table">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Ocupada</th>
-                                <th scope="col">Tipo da sala</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>3</td>
-                                <td>Sim</td>
-                                <td>Preta</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>5</td>
-                                <td>Não</td>
-                                <td>Amarelo</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>7</td>
-                                <td>Sim</td>
-                                <td>Vermelha</td>
-                              </tr>
-                            </tbody>
-                          </table>
+
+                        <?php
+
+                            include('conexao.php');
+
+                            $exibir=('select * from sala INNER JOIN tipo_sala on sala.sala_tipo=tipo_sala.tipo_sala_id;');	
+                            $result=mysqli_query($conexao,$exibir);
+                        
+                            echo('<table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Numero</th>
+                                    <th scope="col">Ocupada</th>
+                                    <th scope="col">Tipo da sala</th>
+                                    </tr>
+                                </thead>');
+
+                        
+                            while($con=mysqli_fetch_array($result))
+			                {
+                                echo('<tbody<tr>
+                                    <th scope="row">'.$con['sala_id'].'</th>');
+                                    echo('<td>'.$con['sala_numero'].'</td>');
+                                    echo('<td>'.$con['sala_ocupada'].'</td>');
+                                    echo('<td>'.$con['tipo_sala_desc'].'</td></tr></tbody>');
+      
+                            }
+                        
+                          echo('</table>');
+                        ?>
                     </div>
                 </div>
             </div>
@@ -201,5 +202,55 @@
         }
 
     </script>
+
+<?php
+
+    if(isset($_POST['cadastrar']))
+    {
+        $numero=trim($_POST['txtNumero']);
+        $ocupada=ucfirst(strtolower(trim($_POST['txtOcupada'])));
+        $tipo=ucfirst(strtolower(trim($_POST['txtTipo'])));
+
+        $sql_verificar=('select * from sala where sala_numero="'.$numero.'";');
+
+        $verificar=mysqli_query($conexao,$sql_verificar);
+
+        $quant_registros=mysqli_num_rows($verificar);
+
+        if($quant_registros>=1)
+        {
+
+            echo('<script> window.alert("Sala já cadastrada."); 
+                window.location="equipamento.php"; </script>');
+
+        }else{
+
+            $sql_inserir=('
+            insert into tipo_sala ( 
+            tipo_sala_desc
+            ) values (
+            "'.$tipo.'");');     
+
+            mysqli_query($conexao,$sql_inserir);
+
+            $id=mysqli_insert_id($conexao);
+
+            $sql_inserir2=('
+            insert into sala ( 
+            sala_numero,
+            sala_ocupada,
+            sala_tipo
+            ) values (
+            "'.$numero.'",
+            "'.$ocupada.'",
+            "'.$id.'");');     
+
+            mysqli_query($conexao,$sql_inserir2);
+
+            echo('<script> window.alert("Inserido com sucesso"); 
+                    window.location="sala.php"; </script>');
+        }
+    }
+?>
 </body>
 </html>
