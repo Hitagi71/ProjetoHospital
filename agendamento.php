@@ -13,21 +13,37 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-    <div class="d-flex toggled" id="wrapper">
+<div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 <div id="nomeAdmin">
-                    <img id="adminFoto" src="imgs/homura.jpg" class="rounded-circle" alt="FotoAdmin" />
-                    <h1><b>Homura</b></h1>
+                    <img id="adminFoto" src="imgs/doutor.jpg" class="rounded-circle" alt="FotoAdmin" />
+                    <h1><b>Dr.Alan</b></h1>
                 </div>
                 <div id="listas">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"></li>
                         <li class="list-group-item">
+                            <i class="material-icons size1">home</i>
+                            <a class="links" href="home.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Home</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
                             <i class="material-icons size1">person_add</i>
                             <a class="links" href="pacientes.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Pacientes</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">assignment_ind</i>
+                            <a class="links" href="funcionario.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Funcionários</b>
                                 </h1>
                             </a>
                         </li>
@@ -39,12 +55,27 @@
                                 </h1>
                             </a>
                         </li>
-
                         <li class="list-group-item">
                             <i class="material-icons size1">assignment</i>
                             <a class="links" href="agendamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Agendamentos</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">local_hospital</i>
+                            <a class="links" href="cadastroAux.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Auxiliares</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">weekend</i>
+                            <a class="links" href="sala.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Sala</b>
                                 </h1>
                             </a>
                         </li>
@@ -60,7 +91,8 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>    
+
         <div id="page-content-wrapper">
             <nav class="border-bottom">
                 <div class="menu">
@@ -128,7 +160,7 @@
                                     <div class="col">
                                         <label>Entrada e saida:</label>
                                         <input type="text" name="txtEntradaSaida" id="txtEntradaSaida" class="form-control" required>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                             <div class="form-group">
@@ -146,6 +178,9 @@
                                     <th scope="col">Equipamento</th>
                                     <th scope="col">Paciente</th>
                                     <th scope="col">Entrada/Saida</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Deletar</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,6 +193,14 @@
                                     <td>Seringa</td>
                                     <td>Nuttylee</td>
                                     <td>15:10</td>
+                                    <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">2</th>
@@ -168,6 +211,14 @@
                                     <td>Peixeira</td>
                                     <td>André</td>
                                     <td>10:00</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">3</th>
@@ -178,6 +229,14 @@
                                     <td>Injeção</td>
                                     <td>Vini</td>
                                     <td>6:30</td>
+                                    <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>

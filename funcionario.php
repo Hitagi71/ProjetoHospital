@@ -21,11 +21,11 @@
             <div class="modal-content">
                 <div class="modal-body text-center">
                     <form role="form" action="#" method="POST" class="f1">
-                        <h3>Cadastro de Paciente</h3>
-                        <p>Preencha suas informações</p>
+                        <h3>Cadastro de Funcionário</h3>
+                        <p>Preencha suas Informações</p>
                         <div class="f1-steps">
                             <div class="f1-progress">
-                                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+                                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="2" style="width: 16.66%;"></div>
                             </div>
                             <div class="f1-step active">
                                 <div class="f1-step-icon">1</div>
@@ -33,86 +33,36 @@
                             <div class="f1-step">
                                 <div class="f1-step-icon">2</div>
                             </div>
-                            <div class="f1-step">
-                                <div class="f1-step-icon">3</div>
-                            </div>
                         </div>
 
                         <fieldset>
-                            <h4>Insira as informações do paciente:</h4>
+                            <h4>Insira as informações do Funcionário:</h4>
                             <div class="form-group">
                                 <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="Nome">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtRG" name="txtRG" class="form-control" placeholder="RG" data-mask="00000-000" >
+                                <input type="text" id="txtEmail" name="txtEmail" class="form-control" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtCpf" name="txtCpf" class="form-control" placeholder="CPF" data-mask="000.000.000-00" data-mask-reverse="true" />
-                            </div>
-                            <div class="form-group">
-                                Sexo:
-                                <div class="form-check">
-                                    <input id="txtSexo" name="txtSexo" class="form-check-input" type="radio"  value="Masculino" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                     Masculino
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="txtSexo" name="txtSexo" class="form-check-input" type="radio"  value="Feminino">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                     Feminino
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input id="txtSexo" name="txtSexo" class="form-check-input" type="radio"  value="Androgeno">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                     Andrógeno
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="f1-about-yourself">Data de nascimento</label>
-                                <input type="date" id="txtNiver" name="txtNiver" class="form-control" placeholder="About yourself..." />
+                                <input type="password" id="txtSenha" name="txtSenha" class="form-control" placeholder="Senha" data-mask-reverse="true" />
                             </div>
                             <div class="f1-buttons">
                                 <button type="button" class="btn btn-next">Próximo</button>
                             </div>
                         </fieldset>
-
                         <fieldset>
-                            <h4>Insira o endereço do paciente:</h4>
+                            <h4>Digite as Especificações do Funcionário:</h4>
                             <div class="form-group">
-                                <input type="text" id="txtCep" name="txtCep" class="form-control" placeholder="CEP" data-mask="00000-000" />
+                                <input type="text" id="txtCargaHoraria" name="txtCargaHoraria" class="form-control" placeholder="Nome">
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtLogradouro" name="txtLogradouro" class="form-control" placeholder="Rua">
+                                <input type="text" id="txtCargo" name="txtCargo" class="form-control"  placeholder="Cargo" >
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtNum" name="txtNum" class="form-control" placeholder="Numero">
+                                <input type="text" id="txtDescricao" name="txtDescricao" class="form-control"  placeholder="Descrição" >
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtBairro" name="txtBairro" class="form-control" placeholder="Bairro"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtComplemento" name="txtComplemento" class="form-control" placeholder="Complemento"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtUF" name="txtUF" class="form-control" placeholder="Estado"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtCidade" name="txtCidade" class="form-control" placeholder="Cidade"/>
-                            </div>
-                            
-                            <div class="f1-buttons">
-                                <button type="button" class="btn btn-previous">Anterior</button>
-                                <button type="button" class="btn btn-next">Próximo</button>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <h4>Digite o plano de saúde do paciente:</h4>
-                            <div class="form-group">
-                                <input type="text" id="txtPlano" name="txtPlano" class="form-control" placeholder="Plano de saude" />
+                                <input type="number" id="txtSalario" name="txtSalario" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
                             </div>
                             <div class="f1-buttons">
                                 <button type="button" class="btn btn-previous">Anterior</button>
@@ -235,40 +185,31 @@
                 </div>
             </nav>  
             <div class="container">
-                <h2 class="mt-5"><i class="material-icons size cursor" data-toggle="modal" data-target="#exampleModal">add_circle</i>&nbsp;&nbsp;&nbsp;Pacientes:</h2>
+                <h2 class="mt-5"><i class="material-icons size cursor" data-toggle="modal" data-target="#exampleModal">add_circle</i>&nbsp;&nbsp;&nbsp;Funcionários:</h2>
                 <div class="row row-cols-1 row-cols-md-4">
                     <div class="col mb-3">
                         <div class="card text-center">
-                            <img src="imgs/nutty.jpg" class="card-img-top imgSize">
+                            <img src="imgs/doutor 1.jpg" class="card-img-top imgSize">
                             <div class="card-body">
-                                <h5 class="card-title">Nuttylee</h5>
+                                <h5 class="card-title">Paula Nogueira</h5>
                                 <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
                             </div>
                         </div>
                     </div>
                     <div class="col mb-3">
                         <div class="card text-center">
-                            <img src="imgs/dede.jpg" class="card-img-top imgSize">
+                            <img src="imgs/doutor 2.jpg" class="card-img-top imgSize">
                             <div class="card-body">
-                                <h5 class="card-title">Dedé</h5>
+                                <h5 class="card-title">Julia Nakamura</h5>
                                 <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
                             </div>
                         </div>
                     </div>
                     <div class="col mb-3">
                         <div class="card text-center">
-                            <img src="imgs/vinao.JPG" class="card-img-top imgSize">
+                            <img src="imgs/doutor 3.jpg" class="card-img-top imgSize">
                             <div class="card-body">
-                                <h5 class="card-title">Vini</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/ruan.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Ruanzoka</h5>
+                                <h5 class="card-title">Tulio Dias</h5>
                                 <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
                             </div>
                         </div>
@@ -278,7 +219,7 @@
         </div>
         <footer class="text-center text-white">
             <div class="mt-3">
-                &copy;Todos Direitos reservados
+                &copy;Todos Direitos Reservados
             </div>
         </footer>
         <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
