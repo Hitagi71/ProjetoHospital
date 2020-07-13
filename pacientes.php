@@ -85,7 +85,7 @@
                                 <input type="text" id="txtCep" name="txtCep" class="form-control" placeholder="CEP" data-mask="00000-000" />
                             </div>
                             <div class="form-group">
-                                <input type="text" id="txtLogradoro" name="txtLogradouro" class="form-control" placeholder="Rua">
+                                <input type="text" id="txtLogradouro" name="txtLogradouro" class="form-control" placeholder="Rua">
                             </div>
                             <div class="form-group">
                                 <input type="text" id="txtNum" name="txtNum" class="form-control" placeholder="Numero">
@@ -280,17 +280,16 @@
             });
 
             
-            $("#cep").on("input",function(){
+            $("#txtCep").keyup("input",function(){
                 $.ajax({
                     url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
                     dataType: 'json',
                     success: function(resposta){
-                        $("#logradouro").val(resposta.logradouro);
-                        $("#complemento").val(resposta.complemento);
-                        $("#bairro").val(resposta.bairro);
-                        $("#cidade").val(resposta.localidade);
-                        $("#uf").val(resposta.uf);
-                        $("#numero").focus();
+                        $("#txtLogradouro").val(resposta.logradouro);
+                        $("#txtComplemento").val(resposta.complemento);
+                        $("#txtBairro").val(resposta.bairro);
+                        $("#txtCidade").val(resposta.localidade);
+                        $("#txtUF").val(resposta.uf);
                     }
                 });
             });
@@ -302,7 +301,7 @@
     if(isset($_POST['cadastrar']))
     {
         $nome=ucwords(strtolower(trim($_POST['txtNome'])));
-        $rg=$_POST['txtRg'];
+        $rg=$_POST['txtRG'];
         $cpf=$_POST['txtCpf'];
         $sexo=$_POST['txtSexo'];
         $niver=$_POST['txtNiver'];
@@ -315,79 +314,73 @@
         $cidade=$_POST['txtCidade'];
         $plano_saude=$_POST['txtPlano'];
 
-        if(!empty($nome) && !empty($rg) && !empty($cpf) && !empty($sexo) && !empty($niver) && !empty($cep) 
-        && !empty($logradouro) && !empty($numero)&& !empty($bairro) && !empty($complemento) && !empty($estado) 
-        && !empty($cidade) && !empty($plano) )
-		{
-            $sql_verificar=('select * from PESSOA where pessoa_rg="'.$rg.'" or pessoa_cpf="'.$cpf.'";');
+        $sql_verificar=('select * from pessoa where pessoa_rg="'.$rg.'" or pessoa_cpf="'.$cpf.'";');
 
-            $verificar=mysqli_query($conexao,$sql_verificar);
+        $verificar=mysqli_query($conexao,$sql_verificar);
 
-            $quant_registros=mysqli_num_rows($verificar);
+        $quant_registros=mysqli_num_rows($verificar);
 
 
-            if($quant_registros>=1)
-            {
+        if($quant_registros>=1)
+        {
 
-                echo('<script> window.alert("Email e/ou CPF já cadastrado(s) "); 
-                    window.location="pacientes.php"; </script>');
+            echo('<script> window.alert("Email e/ou CPF já cadastrado(s) "); 
+                window.location="pacientes.php"; </script>');
 
-            }else{
-
-                $sql_inserir=('
-                insert into PESSOA ( 
-                pessoa_nome,
-                pessoa_rg,
-                pessoa_cpf,
-                pessoa_sexo,
-                pessoa_data_nasc
-                ) values (
-                "'.$nome.'",
-                "'.$rg.'",
-                "'.$cpf.'",
-                "'.$sexo.'",
-                "'.$nascimento.'");');     
-
-                mysqli_query($conexao,$sql_inserir);
-                
-                $sql_inserir2=('
-                insert into ENDERECO ( 
-                endereco_rua,
-                endereco_numero,
-                endereco_bairro,
-                endereco_complemento,
-                endereco_cep,
-                esdereco_estado,
-                endereco_cidade
-                ) values (
-                "'.$logradouro.'",
-                "'.$numero.'",
-                "'.$bairro.'",
-                "'.$complemento.'",
-                "'.$cep.'",
-                "'.$estado.'",
-                "'.$cidade.'");');     
-
-                mysqli_query($conexao,$sql_inserir2);
-
-                $sql_inserir3=('
-                insert into PLANO_SAUDE ( 
-                plano_saude_nome
-                ) values (
-                "'.$plano_saude.'");');     
-
-                mysqli_query($conexao,$sql_inserir3);
-
-                echo('<script> window.alert("Cadastrado com sucesso"); 
-                        window.location="login.php"; </script>');
-            }
         }else{
 
-            echo('<script> window.alert("Preencha todos os campos");
-                    window.location="pacientes.php"; </script>');
+            $sql_inserir=('
+            insert into pessoa ( 
+            pessoa_nome,
+            pessoa_rg,
+            pessoa_cpf,
+            pessoa_sexo,
+            pessoa_data_nasc
+            ) values (
+            "'.$nome.'",
+            "'.$rg.'",
+            "'.$cpf.'",
+            "'.$sexo.'",
+            "'.$niver.'");');     
+
+            mysqli_query($conexao,$sql_inserir);
+            
+            $id=mysqli_insert_id($conexao);
+
+            $sql_inserir2=('
+            insert into ENDERECO ( 
+            endereco_rua,
+            endereco_numero,
+            endereco_bairro,
+            endereco_complemento,
+            endereco_cep,
+            esdereco_estado,
+            endereco_cidade,
+            endereco_pessoa
+            ) values (
+            "'.$logradouro.'",
+            "'.$numero.'",
+            "'.$bairro.'",
+            "'.$complemento.'",
+            "'.$cep.'",
+            "'.$estado.'",
+            "'.$cidade.'",
+            "'.$id.'");');     
+
+            mysqli_query($conexao,$sql_inserir2);
+
+            $sql_inserir3=('
+            insert into PLANO_SAUDE ( 
+            plano_saude_nome
+            ) values (
+            "'.$plano_saude.'");');     
+
+            mysqli_query($conexao,$sql_inserir3);
+
+            echo('<script> window.alert("Cadastrado com sucesso"); 
+                    window.location="login.php"; </script>');
         }
     }
 ?>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
 <?php
 
-	$conexao=mysqli_connect("localhost","root","","bd_hospital") ;
+	$conexao=mysqli_connect("localhost","root","","banco_hospital") ;
 ?>
