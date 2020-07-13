@@ -1,0 +1,148 @@
+drop database if exists banco_hospital;
+create database banco_hospital;
+use banco_hospital;
+
+create table TIPO_EQUIPAMENTO(
+	tipo_equip_id int not null auto_increment primary key,
+	tipo_equip_nome varchar(50)
+);
+
+create table EQUIPAMENTO(
+	equip_id int not null auto_increment primary key,
+	equip_nome varchar(50),
+	equip_descricao varchar(100),
+	equip_marca varchar(30),
+	equip_estado char(2),
+	equip_etipo int not null,
+	foreign key (equip_etipo) references TIPO_EQUIPAMENTO(tipo_equip_id)
+);
+
+create table TIPO_SALA(
+	tipo_sala_id int not null auto_increment primary key,
+	tipo_sala_desc varchar(50)
+);
+
+create table SALA(
+	sala_id int not null auto_increment primary key,
+	sala_numero varchar(10),
+	sala_ocupada varchar(5),
+	sala_tipo int not null,
+	foreign key (sala_tipo) references TIPO_SALA(tipo_sala_id)
+);
+
+create table EQUI_SALA(
+	equi_sala_id int not null auto_increment primary key,
+	equi_sala_nome varchar(40),
+	equi_sala_equipamento int not null,
+	equi_sala int not null,
+	foreign key (equi_sala_equipamento) references EQUIPAMENTO(equip_id),
+	foreign key (equi_sala) references SALA(sala_id)
+);
+
+create table CARGO(
+	cargo_id int not null auto_increment primary key,
+	cargo_carga_horaria int not null,
+	cargo_descricao varchar(50),
+	cargo_valor_salario int not null
+);
+
+create table PESSOA(
+	pessoa_id int not null auto_increment primary key,
+	pessoa_nome varchar(80),
+	pessoa_rg varchar(15),
+	pessoa_cpf varchar(18),
+	pessoa_sexo varchar(15),
+	pessoa_data_nasc date
+);
+
+create table ENDERECO(
+	endereco_id int not null auto_increment primary key,
+	endereco_rua varchar(100),
+	endereco_numero varchar(20),
+	endereco_bairro varchar(100),
+	endereco_complemento varchar(50),
+	endereco_cep varchar(15),
+	endereco_estado varchar(15),
+	endereco_cidade varchar(20),
+	endereco_pessoa int not null,
+	foreign key (endereco_pessoa) references PESSOA (pessoa_id)
+);
+
+create table TIPO_TELEFONE(
+	tipo_tel int not null auto_increment primary key,
+	tipo_tel_descri varchar(50)
+);
+
+create table TELEFONE(
+	telefone_id int not null auto_increment primary key,
+	telefone_numero varchar(15),
+	telefone_tipo int not null,
+	telefone_pessoa int not null,
+	foreign key (telefone_tipo) references TIPO_TELEFONE(tipo_tel),
+	foreign key (telefone_pessoa) references PESSOA(pessoa_id)
+);
+
+create table PLANO_SAUDE(
+	plano_saude_id int not null auto_increment primary key,
+	plano_saude_nome varchar(50)
+);
+
+create table PACIENTE(
+	paciente_id int not null auto_increment primary key,
+	paciente_plano int not null,
+	paciente_nome int not null,
+	foreign key (paciente_plano) references PLANO_SAUDE(plano_saude_id),
+	foreign key (paciente_nome) references PESSOA(pessoa_id)
+);
+
+create table FUNCIONARIO(
+	funcionario_id int not null auto_increment primary key,
+	funcionario_nome varchar(50),
+	funcionario_email varchar(30),
+	funcionario_senha varchar(20),
+	funcionario_cargo int not null,
+	funcionario_cod int,
+	foreign key (funcionario_cargo) references CARGO(cargo_id),
+	foreign key (funcionario_cod) references PESSOA(pessoa_id)
+);
+
+create table TIPO_MEDIC(
+	tipo_medic_id int not null auto_increment primary key,
+	tipo_medic_desc varchar(50)
+);
+
+create table MEDICAMENTO(
+	medic_id int not null auto_increment primary key,
+	medic_nome varchar(30),
+	medic_lote varchar(10),
+	medic_tarja varchar(30),
+	medic_validade date,
+	medic_tipo int not null,
+	foreign key (medic_tipo) references TIPO_MEDIC(tipo_medic_id)
+);
+
+create table ENTRADA_SAIDA(
+	entrada_saida_id int not null auto_increment primary key,
+	entrada_saida_quant_mov int,
+	entrada_saida_medic int not null,
+	foreign key (entrada_saida_medic) references MEDICAMENTO(medic_id)
+);
+
+create table TIPO_AGEND(
+	tipo_agend_id int not null auto_increment primary key,
+	tipo_agend_nome varchar(50)
+);
+
+create table AGENDAMENTO(
+	agend_id int not null auto_increment primary key,
+	agend_data date,
+	agend_hora varchar(20),
+	agend_func varchar(50),
+	agend_equi varchar(10),
+	agend_paciente varchar(50),
+	agend_entr_sai varchar(20),
+	agend_tipo int not null,
+	foreign key (agend_tipo) references TIPO_AGEND(tipo_agend_id)
+);
+
+
