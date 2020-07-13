@@ -93,7 +93,7 @@
                 <div class="row">
                     <div class="col-12 mt-5">
                         <legend>Cadastro de Medicamentos</legend>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation" method="POST" action="#" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
                         <table class="table">
@@ -213,5 +213,64 @@
         }
         
     </script>
+<?php
+    include('conexao.php');
+
+    if(isset($_POST['cadastrar']))
+    {
+        $nome=ucwords(strtolower(trim($_POST['txtNome'])));
+        $lote=$_POST['txtLote'];
+        $tarja=$_POST['txtTarja'];
+        $validade=$_POST['txtData'];
+        $tipo=$_POST['txtTipoMedicamento'];
+
+        $sql_verificar=('select * from medicamento where medic_lote="'.$lote.'";');
+
+        $verificar=mysqli_query($conexao,$sql_verificar);
+
+        $quant_registros=mysqli_num_rows($verificar);
+
+
+        if($quant_registros>=1)
+        {
+
+            echo('<script> window.alert("Registro anteriormente já realizado"); 
+                window.location="medicamento.php"; </script>');
+
+        }else{
+
+            $sql_inserir=('
+            insert into tipo_medic ( 
+	        tipo_medic_desc
+            ) values (
+            "'.$tipo.'");'); 
+
+            mysqli_query($conexao,$sql_inserir);
+
+            $id=mysqli_insert_id($conexao);
+
+            $sql_inserir2=('
+            insert into medicamento ( 
+            medic_nome,
+            medic_lote,
+            medic_tarja,
+            medic_validade,
+	        medic_tipo
+            ) values (
+            "'.$nome.'",
+            "'.$lote.'",
+            "'.$tarja.'",
+            "'.$validade.'",
+            "'.$id.'");');     
+
+            mysqli_query($conexao,$sql_inserir2);
+
+            echo('<script> window.alert("Registrado com sucesso"); 
+                    window.location="medicamento.php"; </script>');
+        }
+    }
+
+?>
+
 </body>
 </html>
