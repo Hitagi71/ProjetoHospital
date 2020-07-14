@@ -157,70 +157,50 @@
                                 <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-                        <table class="table">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Lote</th>
-                                <th scope="col">Tarja</th>
-                                <th scope="col">Data de Validade</th>
-                                <th scope="col">Tipo De Medicamento</th>
-                                <th scope="col">Editar</th>  
-                                <th scope="col">Deletar</th>  
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Rivotril</td>
-                                <td>15</td>
-                                <td>Preta</td>
-                                <td>10/12/2022</td>
-                                <td>Generico</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
+
+                        <?php
+
+                            include('conexao.php');
+
+                            $exibir=('select * from medicamento INNER JOIN tipo_medic on medicamento.medic_tipo=tipo_medic.tipo_medic_id;');	
+                            $result=mysqli_query($conexao,$exibir);
+                        
+                            echo('<table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Lote</th>
+                                    <th scope="col">Tarja</th>
+                                    <th scope="col">Validade</th>
+                                    <th scope="col">Tipo Medicamento</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Deletar</th>
+                                    </tr>
+                                </thead>');
+
+                        
+                            while($con=mysqli_fetch_array($result))
+			                {
+                                echo('<tbody<tr>
+                                    <th scope="row">'.$con['medic_id'].'</th>');
+                                    echo('<td>'.$con['medic_nome'].'</td>');
+                                    echo('<td>'.$con['medic_lote'].'</td>');
+                                    echo('<td>'.$con['medic_tarja'].'</td>');
+                                    echo('<td>'.$con['medic_validade'].'</td>');
+                                    echo('<td>'.$con['tipo_medic_desc'].'</td>');
+                                    echo('<td><span class="table-edit"><button type="button"
                                     class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
+                                    </td>');
+                                    echo('<td><span class="table-remove"><button type="button"
                                     class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Buscopan</td>
-                                <td>18</td>
-                                <td>Amarelo</td>
-                                <td>10/12/2020</td>
-                                <td>Generico</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Dipirona</td>
-                                <td>22</td>
-                                <td>Vermelha</td>
-                                <td>08/11/2032</td>
-                                <td>Marca</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                                    </td> </tr></tbody>');
+      
+                            }
+                        
+                          echo('</table>');
+                        ?>
+                        
                     </div>
                 </div>
             </div>
@@ -271,8 +251,6 @@
         
     </script>
 <?php
-    include('conexao.php');
-
     if(isset($_POST['cadastrar']))
     {
         $nome=ucwords(strtolower(trim($_POST['txtNome'])));

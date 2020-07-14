@@ -167,79 +167,54 @@
                                 <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-                        <table class="table">
-                            <thead class="thead-dark">
-                                <tr>
+
+                        <?php
+
+                            include('conexao.php');
+
+                            $exibir=('select * from agendamento INNER JOIN tipo_agend on agendamento.agend_tipo=tipo_agend.tipo_agend_id;');	
+                            $result=mysqli_query($conexao,$exibir);
+                        
+                            echo('<table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Data</th>
                                     <th scope="col">Hora</th>
-                                    <th scope="col">Tipo de Agendamento</th>
-                                    <th scope="col">Funcionario</th>
-                                    <th scope="col">Equipamento</th>
                                     <th scope="col">Paciente</th>
-                                    <th scope="col">Entrada/Saida</th>
+                                    <th scope="col">Funcionário</th>
+                                    <th scope="col">Equipamento</th>
+                                    <th scope="col">Entrada/Saída</th>
+                                    <th scope="col">Tipo agendamento</th>
                                     <th scope="col">Editar</th>
                                     <th scope="col">Deletar</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>10/12/2020</td>
-                                    <td>15:20</td>
-                                    <td>Particular</td>
-                                    <td>Yetz</td>
-                                    <td>Seringa</td>
-                                    <td>Nuttylee</td>
-                                    <td>15:10</td>
-                                    <td>
-                                <span class="table-edit"><button type="button"
+                                    </tr>
+                                </thead>');
+
+                        
+                            while($con=mysqli_fetch_array($result))
+			                {
+                                echo('<tbody<tr>
+                                    <th scope="row">'.$con['agend_id'].'</th>');
+                                    echo('<td>'.$con['agend_data'].'</td>');
+                                    echo('<td>'.$con['agend_hora'].'</td>');
+                                    echo('<td>'.$con['agend_paciente'].'</td>');
+                                    echo('<td>'.$con['agend_func'].'</td>');
+                                    echo('<td>'.$con['agend_equi'].'</td>');
+                                    echo('<td>'.$con['agend_entr_sai'].'</td>');
+                                    echo('<td>'.$con['tipo_agend_nome'].'</td>');
+                                    echo('<td><span class="table-edit"><button type="button"
                                     class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
+                                    </td>');
+                                    echo('<td><span class="table-remove"><button type="button"
                                     class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>11/12/2020</td>
-                                    <td>10:20</td>
-                                    <td>Clinico</td>
-                                    <td>PatoPapao</td>
-                                    <td>Peixeira</td>
-                                    <td>André</td>
-                                    <td>10:00</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>01/12/2020</td>
-                                    <td>7:00</td>
-                                    <td>Clinico</td>
-                                    <td>PatoPapao</td>
-                                    <td>Injeção</td>
-                                    <td>Vini</td>
-                                    <td>6:30</td>
-                                    <td>
-                                    <span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </td> </tr></tbody>');
+      
+                            }
+                        
+                          echo('</table>');
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -288,7 +263,6 @@
     </script>
 </body>
 <?php
-    include('conexao.php');
 
     if(isset($_POST['cadastrar']))
     {

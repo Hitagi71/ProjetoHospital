@@ -273,20 +273,13 @@
     if(isset($_POST['cadastrar']))
     {
         $nome=ucwords(strtolower(trim($_POST['txtNome'])));
-        $rg=$_POST['txtRG'];
-        $cpf=$_POST['txtCpf'];
-        $sexo=$_POST['txtSexo'];
-        $niver=$_POST['txtNiver'];
-        $cep=trim($_POST['txtCep']);
-        $logradouro=ucwords(strtolower($_POST['txtLogradouro']));
-        $numero=$_POST['txtNum'];
-        $bairro=$_POST['txtBairro'];
-        $complemento=$_POST['txtComplemento'];
-        $estado=$_POST['txtUF'];
-        $cidade=$_POST['txtCidade'];
-        $plano_saude=$_POST['txtPlano'];
+        $email=ucfirst(strtolower(trim($_POST['txtEmail'])));
+        $senha=strtolower(trim($_POST['txtSenha']));
+        $carga_horaria=trim($_POST['txtCargaHoraria']);
+        $cargo=ucwords(strtolower(trim($_POST['txtCargo'])));
+        $salario=trim($_POST['txtSalario']));
 
-        $sql_verificar=('select * from pessoa where pessoa_rg="'.$rg.'" or pessoa_cpf="'.$cpf.'";');
+        $sql_verificar=('select * from funcionario where funcionario_nome="'.$nome.'" and funcionario_email="'.$email.'";');
 
         $verificar=mysqli_query($conexao,$sql_verificar);
 
@@ -296,61 +289,41 @@
         if($quant_registros>=1)
         {
 
-            echo('<script> window.alert("Email e/ou CPF já cadastrado(s) "); 
-                window.location="pacientes.php"; </script>');
+            echo('<script> window.alert("Funcionário já cadastrado."); 
+                window.location="funcionario.php"; </script>');
 
         }else{
 
             $sql_inserir=('
-            insert into pessoa ( 
-            pessoa_nome,
-            pessoa_rg,
-            pessoa_cpf,
-            pessoa_sexo,
-            pessoa_data_nasc
+            insert into cargo ( 
+            cargo_carga_horaria,
+            cargo_descricao,
+            cargo_valor_salario
             ) values (
-            "'.$nome.'",
-            "'.$rg.'",
-            "'.$cpf.'",
-            "'.$sexo.'",
-            "'.$niver.'");');     
+            "'.$carga_horaria.'",
+            "'.$cargo.'",
+            "'.$salario.'");');     
 
             mysqli_query($conexao,$sql_inserir);
-            
+
             $id=mysqli_insert_id($conexao);
 
             $sql_inserir2=('
-            insert into ENDERECO ( 
-            endereco_rua,
-            endereco_numero,
-            endereco_bairro,
-            endereco_complemento,
-            endereco_cep,
-            esdereco_estado,
-            endereco_cidade,
-            endereco_pessoa
+            insert into funcionario ( 
+            funcionario_nome,
+            funcionario_email,
+            funcionario_senha,
+            funcionario_cargo
             ) values (
-            "'.$logradouro.'",
-            "'.$numero.'",
-            "'.$bairro.'",
-            "'.$complemento.'",
-            "'.$cep.'",
-            "'.$estado.'",
-            "'.$cidade.'",
-            "'.$id.'");');     
+            "'.$nome.'",
+            "'.$email.'",
+            "'.$senha.'",
+            "'.$id.'");');      
 
             mysqli_query($conexao,$sql_inserir2);
 
-            $sql_inserir3=('
-            insert into PLANO_SAUDE ( 
-            plano_saude_nome
-            ) values (
-            "'.$plano_saude.'");');     
-
-            mysqli_query($conexao,$sql_inserir3);
-
             echo('<script> window.alert("Cadastrado com sucesso"); 
-                    window.location="login.php"; </script>');
+                    window.location="funcionario.php"; </script>');
         }
     }
 ?>
