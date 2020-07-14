@@ -236,45 +236,106 @@
             </nav>  
             <div class="container">
                 <h2 class="mt-5"><i class="material-icons size cursor" data-toggle="modal" data-target="#exampleModal">add_circle</i>&nbsp;&nbsp;&nbsp;Pacientes:</h2>
-                <div class="row row-cols-1 row-cols-md-4">
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/nutty.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Nuttylee</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/dede.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Dedé</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/vinao.JPG" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Vini</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/ruan.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Ruanzoka</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Tipo Equip</th>
+                                <th scope="col">Editar</th>  
+                                <th scope="col">Deletar</th>    
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                ?>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Ruanzinho</td>
+                                <td>Lenda</td>
+                                <td>Diferenciado 1</td>
+                                <td>SP</td>
+                                <td>1</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Vini</td>
+                                <td>Gado</td>
+                                <td>Diferenciado 2</td>
+                                <td>SP</td>
+                                <td>2</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>Dedé</td>
+                                <td>Safado</td>
+                                <td>Diferenciado 3</td>
+                                <td>SP</td>
+                                <td>3</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">4</th>
+                                <td>Nunutty</td>
+                                <td>Psicopata</td>
+                                <td>Diferenciado 4</td>
+                                <td>SP</td>
+                                <td>4</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">5</th>
+                                <td>Tatalita</td>
+                                <td>Fofa</td>
+                                <td>Diferenciado 5</td>
+                                <td>SP</td>
+                                <td>5</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              
+                              
+                            </tbody>
+                          </table>
         </div>
         <footer class="text-center text-white">
             <div class="mt-3">
