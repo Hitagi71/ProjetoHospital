@@ -13,21 +13,37 @@
 </head>
 
 <body>
-    <div class="d-flex toggled" id="wrapper">
+<div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 <div id="nomeAdmin">
-                    <img id="adminFoto" src="imgs/homura.jpg" class="rounded-circle" alt="FotoAdmin" />
-                    <h1><b>Homura</b></h1>
+                    <img id="adminFoto" src="imgs/doutor.jpg" class="rounded-circle" alt="FotoAdmin" />
+                    <h1><b>Dr.Alan</b></h1>
                 </div>
                 <div id="listas">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"></li>
                         <li class="list-group-item">
+                            <i class="material-icons size1">home</i>
+                            <a class="links" href="home.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Home</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
                             <i class="material-icons size1">person_add</i>
                             <a class="links" href="pacientes.php" target="_self">
                                 <h1 class="nomesLista">
-                                    <b>Pacientes </b>
+                                    <b>Pacientes</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">assignment_ind</i>
+                            <a class="links" href="funcionario.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Funcionários</b>
                                 </h1>
                             </a>
                         </li>
@@ -39,12 +55,27 @@
                                 </h1>
                             </a>
                         </li>
-
                         <li class="list-group-item">
                             <i class="material-icons size1">assignment</i>
                             <a class="links" href="agendamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Agendamentos</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">local_hospital</i>
+                            <a class="links" href="cadastroAux.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Auxiliares</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">weekend</i>
+                            <a class="links" href="sala.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Sala</b>
                                 </h1>
                             </a>
                         </li>
@@ -100,7 +131,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 mt-5">
-                        <legend>Cadastro de Sala</legend>
+                        <h1>Cadastro de Sala</h1>
                         <form  class="needs-validation" method="POST" action="#" novalidate>
                             <div class="form-group">
                                 <div class="form-row">
@@ -122,37 +153,62 @@
                                 <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-
-                        <?php
-
-                            include('conexao.php');
-
-                            $exibir=('select * from sala INNER JOIN tipo_sala on sala.sala_tipo=tipo_sala.tipo_sala_id;');	
-                            $result=mysqli_query($conexao,$exibir);
-                        
-                            echo('<table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Numero</th>
-                                    <th scope="col">Ocupada</th>
-                                    <th scope="col">Tipo da sala</th>
-                                    </tr>
-                                </thead>');
-
-                        
-                            while($con=mysqli_fetch_array($result))
-			                {
-                                echo('<tbody<tr>
-                                    <th scope="row">'.$con['sala_id'].'</th>');
-                                    echo('<td>'.$con['sala_numero'].'</td>');
-                                    echo('<td>'.$con['sala_ocupada'].'</td>');
-                                    echo('<td>'.$con['tipo_sala_desc'].'</td></tr></tbody>');
-      
-                            }
-                        
-                          echo('</table>');
-                        ?>
+                        <table class="table">
+                            <thead class="thead-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Ocupada</th>
+                                <th scope="col">Tipo da sala</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Deletar</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>3</td>
+                                <td>Sim</td>
+                                <td>Preta</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>5</td>
+                                <td>Não</td>
+                                <td>Amarelo</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>7</td>
+                                <td>Sim</td>
+                                <td>Vermelha</td>
+                                <td>
+                                    <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                     </div>
                 </div>
             </div>

@@ -13,21 +13,37 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-    <div class="d-flex toggled" id="wrapper">
+<div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
                 <div id="nomeAdmin">
-                    <img id="adminFoto" src="imgs/homura.jpg" class="rounded-circle" alt="FotoAdmin" />
-                    <h1><b>Homura</b></h1>
+                    <img id="adminFoto" src="imgs/doutor.jpg" class="rounded-circle" alt="FotoAdmin" />
+                    <h1><b>Dr.Alan</b></h1>
                 </div>
                 <div id="listas">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"></li>
                         <li class="list-group-item">
+                            <i class="material-icons size1">home</i>
+                            <a class="links" href="home.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Home</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
                             <i class="material-icons size1">person_add</i>
                             <a class="links" href="pacientes.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Pacientes</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">assignment_ind</i>
+                            <a class="links" href="funcionario.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Funcionários</b>
                                 </h1>
                             </a>
                         </li>
@@ -39,12 +55,27 @@
                                 </h1>
                             </a>
                         </li>
-
                         <li class="list-group-item">
                             <i class="material-icons size1">assignment</i>
                             <a class="links" href="agendamento.php" target="_self">
                                 <h1 class="nomesLista">
                                     <b>Agendamentos</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">local_hospital</i>
+                            <a class="links" href="cadastroAux.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Auxiliares</b>
+                                </h1>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="material-icons size1">weekend</i>
+                            <a class="links" href="sala.php" target="_self">
+                                <h1 class="nomesLista">
+                                    <b>Sala</b>
                                 </h1>
                             </a>
                         </li>
@@ -60,7 +91,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>    
         <div id="page-content-wrapper">
             <nav class="border-bottom">
                 <div class="menu">
@@ -111,9 +142,9 @@
                                 <div class="form-group">
                                     <div class="form-row">
                                         <div class="col-3">
-                                            <label for="">Nome do tipo:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
-                                        </div>
+                                            <label for="">Nome:</label>
+                                            <input type="text" name="txtNome" id="txtNome" class="form-control" placeholder="Nome do Tipo" required>
+                                        </div>   
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -123,21 +154,47 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nome</th>
+                                            <th scope="col">Nome do Tipo de Equipamento</th>
+                                            <th scope="col">Editar</th>
+                                            <th scope="col">Deletar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>10/12/2020</td>
+                                            <td>Seringa</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
-                                            <td>11/12/2020</td>
+                                            <td>Serrote</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
-                                            <td>01/12/2020</td>
+                                            <td>Agulha</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -146,11 +203,11 @@
 
                         <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="tipo_medicamento" id="tipo_medicamento">
-                                <div class="form-group">
+                            <div class="form-group">
                                     <div class="form-row">
                                         <div class="col-3">
-                                            <label for="">Nome do tipo:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
+                                            <label for="">Medicamento Descrição:</label>
+                                            <input type="text" name="txtDescricao" id="txtDescricao" class="form-control" placeholder="Descrição Medicamento" required>
                                         </div>
                                     </div>
                                 </div>
@@ -161,21 +218,47 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nome</th>
+                                            <th scope="col">Medicamento Descrição</th>
+                                            <th scope="col">Editar</th>
+                                            <th scope="col">Deletar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>10/12/2020</td>
+                                            <td>Generico</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
-                                            <td>11/12/2020</td>
+                                            <td>Generico</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
-                                            <td>01/12/2020</td>
+                                            <td>Generico</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -184,14 +267,14 @@
 
                         <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="plano_saude" id="plano_saude">
-                                <div class="form-group">
+                            <div class="form-group">
                                     <div class="form-row">
                                         <div class="col-3">
-                                            <label for="">Nome do Plano:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
-                                        </div>
+                                            <label for="">Nome Do Plano:</label>
+                                            <input type="text" name="txtNome" id="txtNome" class="form-control" placeholder="Nome do Plano" required>
+                                        </div>   
                                     </div>
-                                </div>
+                            </div>
                                 <div class="form-group">
                                     <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                                 </div>
@@ -200,20 +283,46 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Plano de Saude</th>
+                                            <th scope="col">Editar</th>
+                                            <th scope="col">Deletar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>10/12/2020</td>
+                                            <td>Particular</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
-                                            <td>11/12/2020</td>
+                                            <td>Publico</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
-                                            <td>01/12/2020</td>
+                                            <td>Convenio</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -226,15 +335,15 @@
                                     <div class="form-row">
                                         <div class="col-4">
                                             <label for="">Descrição:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
+                                            <input type="text" name="txtDescricao" id="txtDescricao" class="form-control" required>
                                         </div>
                                         <div class="col-4">
                                             <label for="">Carga horario:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
+                                            <input type="text" name="txtCargaHorario" id="txtCargaHorario" class="form-control" required>
                                         </div>
                                         <div class="col-4">
                                             <label for="">Salário:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
+                                            <input type="text" name="txtSalario" id="txtSalario" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -245,21 +354,56 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nome</th>
+                                            <th scope="col">Descrição</th>
+                                            <th scope="col">Carga horario</th>
+                                            <th scope="col">Salário</th>
+                                            <th scope="col">Editar</th>
+                                            <th scope="col">Deletar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>10/12/2020</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>11/12/2020</td>
+                                            <td>Recepcionista</td>
+                                            <td>150</td>
+                                            <td>R$ 1.200,00</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                            <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                               
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
-                                            <td>01/12/2020</td>
+                                            <td>Pediatra</td>
+                                            <td>150</td>
+                                            <td>R$ 2.200,00</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                            <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Cirurgião</td>
+                                            <td>250</td>
+                                            <td>R$ 7.500,00</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                            <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -272,7 +416,7 @@
                                     <div class="form-row">
                                         <div class="col-4">
                                             <label for="">Tipo da sala:</label>
-                                            <input type="text" name="txtData" id="txtData" class="form-control" required>
+                                            <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -283,21 +427,47 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nome</th>
+                                            <th scope="col">Tipo de Sala</th>
+                                            <th scope="col">Editar</th>
+                                            <th scope="col">Deletar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>10/12/2020</td>
+                                            <td>Preta</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                            <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
-                                            <td>11/12/2020</td>
+                                            <td>Vermelha</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                            <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
-                                            <td>01/12/2020</td>
+                                            <td>Amarela</td>
+                                            <td>
+                                <span class="table-edit"><button type="button"
+                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
+                                </td>
+                                            <td>
+                                <span class="table-remove"><button type="button"
+                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                </td>
                                         </tr>
                                     </tbody>
                                 </table>
