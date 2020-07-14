@@ -153,62 +153,46 @@
                                 <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
                         </form>
-                        <table class="table">
-                            <thead class="thead-dark">
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Numero</th>
-                                <th scope="col">Ocupada</th>
-                                <th scope="col">Tipo da sala</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Deletar</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>3</td>
-                                <td>Sim</td>
-                                <td>Preta</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
+
+                        <?php
+
+                            include('conexao.php');
+
+                            $exibir=('select * from sala INNER JOIN tipo_sala on sala.sala_tipo=tipo_sala.tipo_sala_id;');	
+                            $result=mysqli_query($conexao,$exibir);
+                        
+                            echo('<table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Numero</th>
+                                    <th scope="col">Ocupada</th>
+                                    <th scope="col">Tipo da sala</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Deletar</th>
+                                    </tr>
+                                </thead>');
+
+                        
+                            while($con=mysqli_fetch_array($result))
+			                {
+                                echo('<tbody<tr>
+                                    <th scope="row">'.$con['sala_id'].'</th>');
+                                    echo('<td>'.$con['sala_numero'].'</td>');
+                                    echo('<td>'.$con['sala_ocupada'].'</td>');
+                                    echo('<td>'.$con['tipo_sala_desc'].'</td>');
+                                    echo('<td><span class="table-edit"><button type="button"
                                     class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
+                                    </td>');
+                                    echo('<td><span class="table-remove"><button type="button"
                                     class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>5</td>
-                                <td>Não</td>
-                                <td>Amarelo</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>7</td>
-                                <td>Sim</td>
-                                <td>Vermelha</td>
-                                <td>
-                                    <span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                </td>
-                                <td>
-                                <span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                                    </td> </tr></tbody>');
+      
+                            }
+                        
+                          echo('</table>');
+                        ?>
+                
                     </div>
                 </div>
             </div>
