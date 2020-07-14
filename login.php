@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Home</title>
+    <title>Login</title>
     <meta charset="utf-8" />
     <meta name="author" content="O ruan chingou a mae do Dede">
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
@@ -82,7 +82,6 @@
     </script>
 
     <?php
-        <?php
 
         include('conexao.php');
 
