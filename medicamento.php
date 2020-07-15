@@ -12,6 +12,31 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
+
+<?php
+    $id=null;
+    $nome="";
+    $lote="";
+    $tarja="";
+    $validade="";
+    $tipo="";
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        include('conexao.php');
+
+        $exibir=('select * from medicamento INNER JOIN tipo_medic on medicamento.medic_tipo=tipo_medic.tipo_medic_id where medic_id='.$id);	
+        $result=mysqli_query($conexao,$exibir);
+        while($con=mysqli_fetch_array($result)){
+            $nome=$con['medic_nome'];
+            $lote=$con['medic_lote'];
+            $tarja=$con['medic_tarja'];
+            $validade=$con['medic_validade'];
+            $tipo=$con['tipo_medic_desc'];
+        }
+    }
+?>
+
 <div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
@@ -129,15 +154,15 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Nome:</label>
-                                        <input type="text" name="txtNome" id="txtNome" class="form-control" required>
+                                        <input type="text" name="txtNome" id="txtNome" value="<?php echo $nome ?>" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Lote:</label>
-                                        <input type="text" name="txtLote" id="txtLote" class="form-control" required>
+                                        <input type="text" name="txtLote" id="txtLote" value="<?php echo $lote ?>" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Tarja:</label>
-                                        <input type="text" name="txtTarja" id="txtTarja" class="form-control" required>
+                                        <input type="text" name="txtTarja" id="txtTarja" value="<?php echo $tarja ?>" class="form-control" required>
                                       </div>
                                 </div>
                             </div>
@@ -145,16 +170,28 @@
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label for="">Data de validade:</label>
-                                        <input type="date" name="txtData" id="txtData" class="form-control" required>
+                                        <input type="date" name="txtData" id="txtData" value="<?php echo $validade ?>" class="form-control" required>
                                     </div>
                                     <div class="col-4 d-inline">
                                         <label>Tipo do medicamento:</label>
-                                        <input type="text" name="txtTipoMedicamento" id="txtTipoMedicamento" class="form-control" required>
+                                        <input type="text" name="txtTipoMedicamento" id="txtTipoMedicamento" value="<?php echo $tipo ?>" class="form-control" required>
+                                    </div>
+                                    <div class="col-2 mt-5">
+                                        <a href="medicamento.php">Limpar</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <?php
+                                    if($id==null){
+                                        echo '<input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>';
+
+                                    }else{
+                                        echo '<input type="submit" name="editar" value="Editar" class="btn btn-primary btn-lg btn-block"/>';
+                                        
+                                    }
+                                ?>
+                               
                             </div>
                         </form>
 
@@ -189,7 +226,7 @@
                                     echo('<td>'.$con['medic_tarja'].'</td>');
                                     echo('<td>'.date("d/m/Y",strtotime($con['medic_validade'])).'</td>');
                                     echo('<td>'.$con['tipo_medic_desc'].'</td>');
-                                    echo('<td><span class="table-edit"><a href="medicamento.php?editar='.$con['medic_id'].'">
+                                    echo('<td><span class="table-edit"><a href="medicamento.php?id='.$con['medic_id'].'">
                                     <button type="button" class="btn btn-info btn-rounded btn-sm my-0">
                                     Editar</button></span></a></td>');
                                     echo('<td><span class="table-remove"><a href="medicamento.php?deletar='.$con['medic_id'].'">
@@ -305,6 +342,25 @@
         }
     }
 
+    if(isset($_POST['editar']))
+    {
+        
+        $nome=ucwords(strtolower(trim($_POST['txtNome'])));
+        $lote=$_POST['txtLote'];
+        $tarja=$_POST['txtTarja'];
+        $validade=$_POST['txtData'];
+        $tipo=$_POST['txtTipoMedicamento'];
+
+        $sql_inserir=('update medicamento set medic_nome="'.$nome.'",medic_lote="'.$lote.'",medic_tarja="'.$tarja.'",medic_validade="'.$validade.'" where medic_id='.$id.'');     
+        mysqli_query($conexao,$sql_inserir);
+        
+        $sql_inserir2=('update tipo_medic set tipo_medic_desc="'.$tipo.'" where tipo_medic_id='.$id);     
+        mysqli_query($conexao,$sql_inserir2);
+
+        echo '<script> window.alert("Editado com sucesso"); 
+        window.location="medicamento.php"; </script>;';
+    }
+
     if(isset($_GET['deletar']))
     {
 
@@ -313,7 +369,11 @@
 
         mysqli_query($conexao,$sql_excluir);
 
-        echo('<script> window.alert("Excluído"); 
+        $sql_excluir=('Delete from tipo_medic where tipo_medic_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído com sucesso"); 
                     window.location="medicamento.php"; </script>');
     }
 

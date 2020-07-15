@@ -409,7 +409,7 @@
                                 </table>
                             </div>
                         </form>
-                        
+
                         <form class="needs-validation"  method="POST" action="#" novalidate>
                             <div class="tipo_sala" id="tipo_sala">
                                 <div class="form-group">

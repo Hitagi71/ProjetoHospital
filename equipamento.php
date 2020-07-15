@@ -12,6 +12,31 @@
 </head>
 
 <body>
+<?php
+    $id=null;
+    $nome="";
+    $descricao="";
+    $marca="";
+    $estado="";
+    $tipo="";
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        include('conexao.php');
+
+        
+        $exibir=('select * from equipamento INNER JOIN tipo_equipamento on equipamento.equip_etipo=tipo_equipamento.tipo_equip_id where equip_id='.$id.';');	
+        $result=mysqli_query($conexao,$exibir);
+        while($con=mysqli_fetch_array($result)){
+            $nome=$con['equip_nome'];
+            $descricao=$con['equip_descricao'];
+            $marca=$con['equip_marca'];
+            $estado=$con['equip_estado'];
+            $tipo=$con['tipo_equip_nome'];
+        }  
+        
+    }
+?>
 <div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
@@ -137,15 +162,15 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Nome:</label>
-                                        <input type="text" name="txtNome" id="txtNome" class="form-control" required>
+                                        <input type="text" name="txtNome" id="txtNome" value="<?php echo $nome ?>" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Descrição:</label>
-                                        <input type="text" name="txtDescricao" id="txtDescricao" class="form-control" required>
+                                        <input type="text" name="txtDescricao" id="txtDescricao" value="<?php echo $descricao ?>" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Marca:</label>
-                                        <input type="text" name="txtMarca" id="txtMarca" class="form-control" required>
+                                        <input type="text" name="txtMarca" id="txtMarca" value="<?php echo $marca ?>" class="form-control" required>
                                       </div>  
                                 </div>
                             </div>
@@ -153,20 +178,30 @@
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label for="">Estado:</label>
-                                        <input type="text" name="txtEstado" id="txtEstado" class="form-control" required>
+                                        <input type="text" name="txtEstado" id="txtEstado" value="<?php echo $estado ?>" class="form-control" required>
                                     </div>
                                     <div class="col-3 d-inline">
                                         <label>Tipo Equipamento</label>
-                                        <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
+                                        <input type="text" name="txtTipo" id="txtTipo" value="<?php echo $tipo ?>" class="form-control" required>
+                                    </div>
+                                    <div class="col-2 mt-5">
+                                        <a href="equipamento.php">Limpar</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar" name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <?php
+                                    if($id==null || isset($_GET['tipo'])){
+                                        echo '<input type="submit" value="Cadastrar"  name="cadastrar" class="btn btn-primary btn-lg btn-block"/>';
+                                    }else{
+                                        echo '<input type="submit" value="Editar"  name="editar" class="btn btn-primary btn-lg btn-block"/>';
+                                    }
+                                ?>
                             </div>
                         </form>
 
                         <?php
+
                             include('conexao.php');
 
                             $exibir=('select * from equipamento INNER JOIN tipo_equipamento on equipamento.equip_etipo=tipo_equipamento.tipo_equip_id;');	
@@ -188,22 +223,25 @@
 
                             while($con=mysqli_fetch_array($result))
 			                {
-                                echo('<tbody<tr>
-                                    <th scope="row">'.$con['equip_id'].'</th>');
-                                    echo('<td>'.$con['equip_nome'].'</td>');
-                                    echo('<td>'.$con['equip_descricao'].'</td>');
-                                    echo('<td>'.$con['equip_marca'].'</td>');
-                                    echo('<td>'.$con['equip_estado'].'</td>');
-                                    echo('<td>'.$con['tipo_equip_nome'].'</td>');
-                                    echo('<td><span class="table-edit"><a href="equipamento.php?editar='.$con['equip_id'].'">
-                                    <button type="button" class="btn btn-info btn-rounded btn-sm my-0">
-                                    Editar</button></span></a></td>');
-                                    echo('<td><span class="table-remove"><a href="equipamento.php?deletar='.$con['equip_id'].'">
-                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
-                                    </td> </tr></tbody>');
+                                echo('<tbody
+                                        <tr>
+                                            <th scope="row">'.$con['equip_id'].'</th>');
+                                            echo('<td>'.$con['equip_nome'].'</td>');
+                                            echo('<td>'.$con['equip_descricao'].'</td>');
+                                            echo('<td>'.$con['equip_marca'].'</td>');
+                                            echo('<td>'.$con['equip_estado'].'</td>');
+                                            echo('<td>'.$con['tipo_equip_nome'].'</td>');
+                                            echo('<td>
+                                                    <span class="table-edit"><a href="equipamento.php?id='.$con['equip_id'].'"><button type="button" class="btn btn-info btn-rounded btn-sm my-0"">Editar</button></a></span>
+                                                    </td>');
+                                            echo('<td>
+                                                    <span class="table-remove"><a href="equipamento.php?deletar='.$con['equip_id'].'">
+                                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                                </td> 
+                                        </tr>
+                                    </tbody>');
+                                
                             }
-                        
-                          echo('</table>');
                         ?>
                          
                     </div>
@@ -312,6 +350,25 @@
         }
     }
 
+    if(isset($_POST['editar']))
+    {
+        
+        $nome=ucwords(strtolower(trim($_POST['txtNome'])));
+        $descricao=ucfirst(strtolower(trim($_POST['txtDescricao'])));
+        $marca=ucwords(strtolower(trim($_POST['txtMarca'])));
+        $estado=ucwords(strtolower(trim($_POST['txtEstado'])));
+        $tipo=ucfirst(strtolower(trim($_POST['txtTipo'])));
+
+        $sql_inserir=('update equipamento set equip_nome="'.$nome.'",equip_descricao="'.$descricao.'",equip_marca="'.$marca.'",equip_estado="'.$estado.'"  where equip_id='.$id.'');     
+        mysqli_query($conexao,$sql_inserir);
+        
+        $sql_inserir2=('update tipo_equipamento set tipo_equip_nome="'.$tipo.'" where tipo_equip_id='.$id);     
+        mysqli_query($conexao,$sql_inserir2);
+
+        echo '<script> window.alert("Editado com sucesso"); 
+        window.location="equipamento.php"; </script>;';
+    }
+
     if(isset($_GET['deletar']))
     {
 
@@ -320,7 +377,11 @@
 
         mysqli_query($conexao,$sql_excluir);
 
-        echo('<script> window.alert("Excluído"); 
+        $sql_excluir=('Delete from tipo_equipamento where tipo_equip_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído com sucesso"); 
                     window.location="equipamento.php"; </script>');
     }
 ?>

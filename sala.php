@@ -11,8 +11,25 @@
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
-
 <body>
+<?php
+    $id=null;
+    $numero="";
+    $ocupada="";
+    $tipo="";
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        include('conexao.php');
+        $exibir=('select * from sala INNER JOIN tipo_sala on sala.sala_tipo=tipo_sala.tipo_sala_id where sala_id='.$id);	
+        $result=mysqli_query($conexao,$exibir);
+        while($con=mysqli_fetch_array($result)){
+            $numero=$con['sala_numero'];
+            $ocupada=$con['sala_ocupada'];
+            $tipo=$con['tipo_sala_desc'];
+        }
+    }
+?>
 <div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
@@ -128,10 +145,7 @@
             </form>
           </div>
         </nav>
-        <?php
-            include('conexao.php');
-            $con = "";
-        ?>
+
             <div class="container">
                 <div class="row">
                     <div class="col-12 mt-5">
@@ -141,24 +155,38 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Numero:</label>
-                                        <input type="number" name="txtNumero" id="txtNumero" class="form-control"  value="<?php echo($con['sala_numero']); ?>" required>
+                                        <input type="number" name="txtNumero" value="<?php echo $numero ?>" id="txtNumero" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Ocupada:</label>
-                                        <input type="text" name="txtOcupada" id="txtOcupada" class="form-control" value="<?php echo($con['sala_ocupada']); ?>" required>
+                                        <input type="text" name="txtOcupada" value="<?php echo $ocupada ?>" id="txtOcupada" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Tipo da sala:</label>
-                                        <input type="text" name="txtTipo" id="txtTipo" class="form-control" value="<?php echo($con['tipo_sala_desc']); ?>" required>
+                                        <input type="text" name="txtTipo" value="<?php echo $tipo ?>" id="txtTipo" class="form-control" required>
                                       </div>
+                                      <div class="col-2 mt-5">
+                                        <a href="sala.php">Limpar</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <?php
+                                    if($id==null){
+                                        echo '<input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>';
+
+                                    }else{
+                                        echo '<input type="submit" name="editar" value="Editar" class="btn btn-primary btn-lg btn-block"/>';
+                                        
+                                    }
+                                ?>
+                               
                             </div>
                         </form>
 
                         <?php
+
+                            include('conexao.php');
 
                             $exibir=('select * from sala INNER JOIN tipo_sala on sala.sala_tipo=tipo_sala.tipo_sala_id;');	
                             $result=mysqli_query($conexao,$exibir);
@@ -184,9 +212,9 @@
                                     echo('<td>'.$con['sala_numero'].'</td>');
                                     echo('<td>'.$con['sala_ocupada'].'</td>');
                                     echo('<td>'.$con['tipo_sala_desc'].'</td>');
-                                    echo('<td><span class="table-edit"><a href="sala.php?editar='.$con['sala_id'].'">
-                                    <button type="button" class="btn btn-info btn-rounded btn-sm my-0">
-                                    Editar</button></span></a></td>');
+                                    echo('<td><span class="table-edit"><a href="sala.php?id='.$con['sala_id'].'">
+                                    <button type="button" class="btn btn-info btn-rounded btn-sm my-0"">Editar</button></a></span>
+                                    </td>');
                                     echo('<td><span class="table-remove"><a href="sala.php?deletar='.$con['sala_id'].'">
                                     <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
                                     </td> </tr></tbody>');
@@ -264,7 +292,7 @@
         {
 
             echo('<script> window.alert("Sala já cadastrada."); 
-                window.location="equipamento.php"; </script>');
+                window.location="sala.php"; </script>');
 
         }else{
 
@@ -295,22 +323,22 @@
         }
     }
 
-    if(isset($_GET['editar']))
+
+    if(isset($_POST['editar']))
     {
+        
+        $numero=trim($_POST['txtNumero']);
+        $ocupada=ucfirst(strtolower(trim($_POST['txtOcupada'])));
+        $tipo=ucfirst(strtolower(trim($_POST['txtTipo'])));
 
-        $codigo=$_GET['editar'];
+        $sql_inserir=('update sala set sala_numero="'.$numero.'",sala_ocupada="'.$ocupada.'" where sala_id='.$id.'');     
+        mysqli_query($conexao,$sql_inserir);
+        
+        $sql_inserir2=('update tipo_sala set tipo_sala_desc="'.$tipo.'" where tipo_sala_id='.$id);     
+        mysqli_query($conexao,$sql_inserir2);
 
-        $sql_achar=('select * from sala inner join tipo_sala on sala.sala_id=tipo_sala.tipo_sala_id where sala_id='.$codigo.';');
-
-        $achar=mysqli_query($conexao,$sql_achar);
-
-        $quant_registros=mysqli_num_rows($achar);
-
-        if($quant_registros>=1)
-        {
-            $con = mysqli_fetch_array($achar);
-           
-        }
+        echo '<script> window.alert("Editado com sucesso"); 
+        window.location="sala.php"; </script>;';
     }
 
     if(isset($_GET['deletar']))
@@ -321,7 +349,11 @@
 
         mysqli_query($conexao,$sql_excluir);
 
-        echo('<script> window.alert("Excluído"); 
+        $sql_excluir=('Delete from tipo_sala where tipo_sala_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído com sucesso"); 
                     window.location="sala.php"; </script>');
     }
 ?>
