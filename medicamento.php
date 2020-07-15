@@ -187,20 +187,20 @@
                                     echo('<td>'.$con['medic_nome'].'</td>');
                                     echo('<td>'.$con['medic_lote'].'</td>');
                                     echo('<td>'.$con['medic_tarja'].'</td>');
-                                    echo('<td>'.$con['medic_validade'].'</td>');
+                                    echo('<td>'.date("d/m/Y",strtotime($con['medic_validade'])).'</td>');
                                     echo('<td>'.$con['tipo_medic_desc'].'</td>');
-                                    echo('<td><span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                    </td>');
-                                    echo('<td><span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                    echo('<td><span class="table-edit"><a href="medicamento.php?editar='.$con['medic_id'].'">
+                                    <button type="button" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Editar</button></span></a></td>');
+                                    echo('<td><span class="table-remove"><a href="medicamento.php?deletar='.$con['medic_id'].'">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
                                     </td> </tr></tbody>');
       
                             }
                         
                           echo('</table>');
                         ?>
-                        
+
                     </div>
                 </div>
             </div>
@@ -303,6 +303,18 @@
             echo('<script> window.alert("Registrado com sucesso"); 
                     window.location="medicamento.php"; </script>');
         }
+    }
+
+    if(isset($_GET['deletar']))
+    {
+
+        $codigo=$_GET['deletar'];
+        $sql_excluir=('Delete from medicamento where medic_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído"); 
+                    window.location="medicamento.php"; </script>');
     }
 
 ?>

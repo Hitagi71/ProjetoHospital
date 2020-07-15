@@ -195,11 +195,11 @@
                                     echo('<td>'.$con['equip_marca'].'</td>');
                                     echo('<td>'.$con['equip_estado'].'</td>');
                                     echo('<td>'.$con['tipo_equip_nome'].'</td>');
-                                    echo('<td><span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                    </td>');
-                                    echo('<td><span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                    echo('<td><span class="table-edit"><a href="equipamento.php?editar='.$con['equip_id'].'">
+                                    <button type="button" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Editar</button></span></a></td>');
+                                    echo('<td><span class="table-remove"><a href="equipamento.php?deletar='.$con['equip_id'].'">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
                                     </td> </tr></tbody>');
                             }
                         
@@ -310,6 +310,18 @@
             echo('<script> window.alert("Inserido com sucesso"); 
                     window.location="equipamento.php"; </script>');
         }
+    }
+
+    if(isset($_GET['deletar']))
+    {
+
+        $codigo=$_GET['deletar'];
+        $sql_excluir=('Delete from equipamento where equip_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído"); 
+                    window.location="equipamento.php"; </script>');
     }
 ?>
 </body>

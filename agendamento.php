@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicamento</title>
+    <title>Agendamento</title>
     <meta name="author" content="dede">
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -203,11 +203,11 @@
                                     echo('<td>'.$con['agend_equi'].'</td>');
                                     echo('<td>'.$con['agend_entr_sai'].'</td>');
                                     echo('<td>'.$con['tipo_agend_nome'].'</td>');
-                                    echo('<td><span class="table-edit"><button type="button"
-                                    class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
-                                    </td>');
-                                    echo('<td><span class="table-remove"><button type="button"
-                                    class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                    echo('<td><span class="table-edit"><a href="agendamento.php?editar='.$con['agend_id'].'">
+                                    <button type="button" class="btn btn-info btn-rounded btn-sm my-0">
+                                    Editar</button></span></a></td>');
+                                    echo('<td><span class="table-remove"><a href="agendamento.php?deletar='.$con['agend_id'].'">
+                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
                                     </td> </tr></tbody>');
       
                             }
@@ -322,6 +322,18 @@
             echo('<script> window.alert("Registrado com sucesso"); 
                     window.location="agendamento.php"; </script>');
         }
+    }
+
+    if(isset($_GET['deletar']))
+    {
+
+        $codigo=$_GET['deletar'];
+        $sql_excluir=('Delete from agendamento where agend_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído"); 
+                    window.location="agendamento.php"; </script>');
     }
 
 ?>

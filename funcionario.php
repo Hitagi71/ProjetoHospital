@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Home</title>
+    <title>Funcionario</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -53,7 +53,7 @@
                         <fieldset>
                             <h4>Digite as Especificações do Funcionário:</h4>
                             <div class="form-group">
-                                <input type="text" id="txtCargaHoraria" name="txtCargaHoraria" class="form-control" placeholder="Nome">
+                                <input type="text" id="txtCargaHoraria" name="txtCargaHoraria" class="form-control" placeholder="Carga horária">
                             </div>
                             <div class="form-group">
                                 <input type="text" id="txtCargo" name="txtCargo" class="form-control"  placeholder="Cargo" >
@@ -277,7 +277,7 @@
         $senha=strtolower(trim($_POST['txtSenha']));
         $carga_horaria=trim($_POST['txtCargaHoraria']);
         $cargo=ucwords(strtolower(trim($_POST['txtCargo'])));
-        $salario=trim($_POST['txtSalario']));
+        $salario=trim($_POST['txtSalario']);
 
         $sql_verificar=('select * from funcionario where funcionario_nome="'.$nome.'" and funcionario_email="'.$email.'";');
 
