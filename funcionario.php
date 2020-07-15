@@ -37,33 +37,11 @@
 
                         <fieldset>
                             <h4>Insira as informações do Funcionário:</h4>
-                            <div class="form-group">
-                                <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="Nome">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtEmail" name="txtEmail" class="form-control" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" id="txtSenha" name="txtSenha" class="form-control" placeholder="Senha" data-mask-reverse="true" />
-                            </div>
-                            <div class="f1-buttons">
-                                <button type="button" class="btn btn-next">Próximo</button>
-                            </div>
+                           
                         </fieldset>
                         <fieldset>
                             <h4>Digite as Especificações do Funcionário:</h4>
-                            <div class="form-group">
-                                <input type="text" id="txtCargaHoraria" name="txtCargaHoraria" class="form-control" placeholder="Nome">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtCargo" name="txtCargo" class="form-control"  placeholder="Cargo" >
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="txtDescricao" name="txtDescricao" class="form-control"  placeholder="Descrição" >
-                            </div>
-                            <div class="form-group">
-                                <input type="number" id="txtSalario" name="txtSalario" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
-                            </div>
+                            
                             <div class="f1-buttons">
                                 <button type="button" class="btn btn-previous">Anterior</button>
                                 <button type="submit" class="btn btn-submit" name="cadastrar">Cadastrar</button>
@@ -185,34 +163,88 @@
                 </div>
             </nav>  
             <div class="container">
-                <h2 class="mt-5"><i class="material-icons size cursor" data-toggle="modal" data-target="#exampleModal">add_circle</i>&nbsp;&nbsp;&nbsp;Funcionários:</h2>
-                <div class="row row-cols-1 row-cols-md-4">
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/doutor 1.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Paula Nogueira</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="mt-5">Cadastro de Funcionario</h1>
+                        <form>   
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col-4">
+                                        <label>Nome:</label>
+                                        <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="Nome">  
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Email:</label>
+                                        <input type="email" id="txtEmail" name="txtEmail" class="form-control" placeholder="Email">      
+                                    </div>  
+                                    <div class="col-4">
+                                        <label>Senha:</label>  
+                                        <input type="password" id="txtSenha" name="txtSenha" class="form-control" placeholder="Senha" data-mask-reverse="true" />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/doutor 2.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Julia Nakamura</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
+                            <div class="form-group">
+                                <div class="form-row">
+                                <div class="col-5">
+                                        <label>Cargo:</label>
+                                        <input type="text" id="txtCargo" name="txtCargo" class="form-control"  placeholder="Cargo" >
+                                    </div> 
+                                    <div class="col-2">
+                                        <label>Carga Horaria:</label>
+                                        <input type="time" id="txtCargaHoraria" name="txtCargaHoraria" class="form-control">
+                                    </div>
+                                    
+                                    <div class="col-2">
+                                        <label>Salario:</label>
+                                        <input type="number" id="txtSalario" name="txtSalario" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col mb-3">
-                        <div class="card text-center">
-                            <img src="imgs/doutor 3.jpg" class="card-img-top imgSize">
-                            <div class="card-body">
-                                <h5 class="card-title">Tulio Dias</h5>
-                                <p class="card-text"><i class="material-icons">create</i>&nbsp;&nbsp;&nbsp;<i class="material-icons">delete</i></p>
+                            <div class="form-group">
+                                <input type="submit" value="Cadastrar"  name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
                             </div>
-                        </div>
+                        </form>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Cargo</th>
+                                    <th scope="col">Salario</th>
+                                    <th scope="col">Carga Horaria</th>
+                                    <th scope="col">Alterar</th>  
+                                    <th scope="col">Deletar</th>    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    /*include('conexao.php');
+
+                                    $exibir=('select * from pessoa');	
+                                    $result=mysqli_query($conexao,$exibir);
+
+                                    while($con=mysqli_fetch_array($result)){
+                                        echo('<tbody
+                                                <tr>
+                                                    <th scope="row">'.$con['pessoa_id'].'</th>');
+                                                        echo('<td>'.$con['pessoa_nome'].'</td>');
+                                                        echo('<td>'.$con['pessoa_rg'].'</td>');
+                                                        echo('<td>'.$con['pessoa_cpf'].'</td>');
+                                                        echo('<td>'.$con['pessoa_sexo'].'</td>');
+                                                         echo('<td>'.date("d/m/Y",strtotime($con['pessoa_data_nasc'])).'</td>');
+                                                         echo('<td>
+                                                                <span class="table-edit"><a href="pacientes.php?id='.$con['pessoa_id'].'"><button type="button" class="btn btn-info btn-rounded btn-sm my-0"">Editar</button></a></span>
+                                                                </td>');
+                                                        echo('<td>
+                                                                <span class="table-remove"><a href="pacientes.php?id='.$con['pessoa_id'].'&&tipo=excluir"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Excluir</button></a></span>
+                                                            </td> 
+                                                </tr>
+                                            </tbody>');
+                                        }*/
+                                    ?>
+                            </tbody>
+                        </table>  
                     </div>
                 </div>
             </div>
@@ -249,21 +281,6 @@
             $("#menu-toggle").click(function(e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
-            });
-
-            
-            $("#txtCep").keyup("input",function(){
-                $.ajax({
-                    url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
-                    dataType: 'json',
-                    success: function(resposta){
-                        $("#txtLogradouro").val(resposta.logradouro);
-                        $("#txtComplemento").val(resposta.complemento);
-                        $("#txtBairro").val(resposta.bairro);
-                        $("#txtCidade").val(resposta.localidade);
-                        $("#txtUF").val(resposta.uf);
-                    }
-                });
             });
         </script>
 
