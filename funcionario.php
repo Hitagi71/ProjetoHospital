@@ -277,7 +277,7 @@
         $senha=strtolower(trim($_POST['txtSenha']));
         $carga_horaria=trim($_POST['txtCargaHoraria']);
         $cargo=ucwords(strtolower(trim($_POST['txtCargo'])));
-        $salario=trim($_POST['txtSalario']));
+        $salario=trim($_POST['txtSalario']);
 
         $sql_verificar=('select * from funcionario where funcionario_nome="'.$nome.'" and funcionario_email="'.$email.'";');
 

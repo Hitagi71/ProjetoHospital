@@ -11,8 +11,25 @@
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
-
 <body>
+<?php
+    $id=null;
+    $numero="";
+    $ocupada="";
+    $tipo="";
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        include('conexao.php');
+        $exibir=('select * from sala where sala_id='.$id);	
+        $result=mysqli_query($conexao,$exibir);
+        while($con=mysqli_fetch_array($result)){
+            $numero=$con['sala_numero'];
+            $ocupada=$con['sala_ocupada'];
+            $tipo=$con['sala_tipo'];
+        }
+    }
+?>
 <div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
@@ -137,20 +154,29 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="">Numero:</label>
-                                        <input type="number" name="txtNumero" id="txtNumero" class="form-control" required>
+                                        <input type="number" name="txtNumero" value="<?php echo $numero ?>" id="txtNumero" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Ocupada:</label>
-                                        <input type="text" name="txtOcupada" id="txtOcupada" class="form-control" required>
+                                        <input type="text" name="txtOcupada" value="<?php echo $ocupada ?>" id="txtOcupada" class="form-control" required>
                                       </div>
                                       <div class="col">
                                         <label for="">Tipo da sala:</label>
-                                        <input type="text" name="txtTipo" id="txtTipo" class="form-control" required>
+                                        <input type="text" name="txtTipo" value="<?php echo $tipo ?>" id="txtTipo" class="form-control" required>
                                       </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <?php
+                                    if($id==null){
+                                        echo '<input type="submit" name="cadastrar" value="Cadastrar" class="btn btn-primary btn-lg btn-block"/>';
+
+                                    }else{
+                                        echo '<input type="submit" name="cadastrar" value="Editar" class="btn btn-primary btn-lg btn-block"/>';
+                                        
+                                    }
+                                ?>
+                               
                             </div>
                         </form>
 
@@ -181,7 +207,7 @@
                                     echo('<td>'.$con['sala_numero'].'</td>');
                                     echo('<td>'.$con['sala_ocupada'].'</td>');
                                     echo('<td>'.$con['tipo_sala_desc'].'</td>');
-                                    echo('<td><span class="table-edit"><button type="button"
+                                    echo('<td><a href="sala.php?id='.$con['sala_id'].'"<span class="table-edit"><button type="button"
                                     class="btn btn-info btn-rounded btn-sm my-0">Editar</button></span>
                                     </td>');
                                     echo('<td><span class="table-remove"><button type="button"
