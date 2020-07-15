@@ -38,6 +38,9 @@
 
                 $deletar=('delete from pessoa where pessoa_id='.$id);	
                 $result=mysqli_query($conexao,$deletar);
+
+               echo('<script> window.alert("Excluído com sucesso"); 
+                     </script>');
                 
             }else{
                 $exibir=('select * from pessoa');	
