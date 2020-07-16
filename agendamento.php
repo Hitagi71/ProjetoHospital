@@ -237,7 +237,7 @@
 			                {
                                 echo('<tbody<tr>
                                     <th scope="row">'.$con['agend_id'].'</th>');
-                                    echo('<td>'.$con['agend_data'].'</td>');
+                                    echo('<td>'.date("d/m/Y",strtotime($con['agend_data'])).'</td>');
                                     echo('<td>'.$con['agend_hora'].'</td>');
                                     echo('<td>'.$con['agend_paciente'].'</td>');
                                     echo('<td>'.$con['agend_func'].'</td>');

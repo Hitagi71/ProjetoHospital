@@ -193,7 +193,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h1 class="mt-5">Cadastro de Funcionário</h1>
-                        <form>   
+                        <form method="POST" action="#">   
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-4">
@@ -223,7 +223,7 @@
                                     
                                     <div class="col-2">
                                         <label>Salario:</label>
-                                        <input type="number" id="txtSalario" name="txtSalario"  value="<?php echo $salario ?>" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
+                                        <input type="number" id="txtSalario" name="txtSalario"  value="R$ <?php echo $salario ?>" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
                                     </div>
                                     <div class="col-2 mt-5">
                                         <a href="funcionario.php">Limpar</a>
@@ -389,14 +389,14 @@
         $nome=ucwords(strtolower(trim($_POST['txtNome'])));
         $email=strtolower(trim($_POST['txtEmail']));
         $senha=strtolower(trim($_POST['txtSenha']));
-        $carga_horaria=trim($_POST['txtCargaHoraria']);
+        $carga_horaria=$_POST['txtCargaHoraria'];
         $cargo=ucwords(strtolower(trim($_POST['txtCargo'])));
         $salario=trim($_POST['txtSalario']);
 
-        $sql_inserir=('update funcionario set funcionario_nome="'.$nome.'",funcionario_email="'.$email.'",funcionario_senha="'.$senha.'" where funcionario_id='.$id.'');     
+        $sql_inserir=('update funcionario set funcionario_nome="'.$nome.'",funcionario_email="'.$email.'",funcionario_senha="'.$senha.'" where funcionario_id='.$id.';');     
         mysqli_query($conexao,$sql_inserir);
         
-        $sql_inserir2=('update cargo set cargo_carga_horaria="'.$carga_horaria.'",cargo_descricao="'.$cargo.'", carga_valor_salario="'.$salario.'" where cargo_id='.$id);     
+        $sql_inserir2=('update cargo set cargo_carga_horaria="'.$carga_horaria.'",cargo_descricao="'.$cargo.'", cargo_valor_salario="'.$salario.'" where cargo_id='.$id.';');     
         mysqli_query($conexao,$sql_inserir2);
 
         echo '<script> window.alert("Editado com sucesso"); 
