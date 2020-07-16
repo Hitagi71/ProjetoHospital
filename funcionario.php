@@ -325,7 +325,7 @@
         </script>
 
 <?php
-
+    
     if(isset($_POST['cadastrar']))
     {
         $nome=ucwords(strtolower(trim($_POST['txtNome'])));
@@ -339,6 +339,7 @@
 
         $verificar=mysqli_query($conexao,$sql_verificar);
 
+        echo $sql_verificar;
         $quant_registros=mysqli_num_rows($verificar);
 
 
@@ -360,6 +361,8 @@
             "'.$cargo.'",
             "'.$salario.'");');     
 
+            
+
             mysqli_query($conexao,$sql_inserir);
 
             $id=mysqli_insert_id($conexao);
@@ -378,8 +381,7 @@
 
             mysqli_query($conexao,$sql_inserir2);
 
-            echo('<script> window.alert("Cadastrado com sucesso"); 
-                    window.location="funcionario.php"; </script>');
+            
         }
     }
 
