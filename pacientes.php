@@ -43,7 +43,7 @@
                      </script>');
                 
             }else{
-                $exibir=('select * from pessoa');	
+                $exibir=('select * from pessoa where pessoa_id='.$id);	
                 $result=mysqli_query($conexao,$exibir);
                 while($con=mysqli_fetch_array($result)){
                     $nome=$con['pessoa_nome'];
@@ -211,7 +211,9 @@
                                         <input type="radio" id="txtSexo" name="txtSexo" value="Feminino">
                                         <label for="female">Feminino</label>&nbsp;
                                         <input type="radio" id="txtSexo" name="txtSexo" value="Androgeno">
-                                        <label for="other">Androgeno</label>             
+                                        <label for="other">Androgeno</label>&nbsp;
+                                        <input type="radio" id="txtSexo" name="txtSexo" value="Outro">
+                                        <label for="other">Outro</label>             
                                     </div>
                                     <div class="col-4">
                                         <label>Data de nascimento:</label>
