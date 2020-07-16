@@ -7,79 +7,41 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/simple-sidebar.css">
-    <link rel="stylesheet" type="text/css" href="css/form.css" />
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/form.css">
 </head>
 
 <body>
 
-<?php
-    $id=null;
-    $nome="";
-    $email="";
-    $senha="";
-    $carga_horaria="";
-    $cargo="";
-    $salario="";
+    <?php
+        $id=null;
+        $nome="";
+        $email="";
+        $senha="";
+        $carga_horaria="";
+        $cargo="";
+        $salario="";
+        $id_cargo="";
 
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        include('conexao.php');
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            include('conexao.php');
 
-        
-        $exibir=('select * from funcionario INNER JOIN cargo on funcionario.funcionario_id=cargo.cargo_id where funcionario_id='.$id.';');	
-        $result=mysqli_query($conexao,$exibir);
-        while($con=mysqli_fetch_array($result)){
-            $nome=$con['funcionario_nome'];
-            $email=$con['funcionario_email'];
-            $senha=$con['funcionario_senha'];
-            $carga_horaria=$con['cargo_carga_horaria'];
-            $cargo=$con['cargo_descricao'];
-            $salario=$con['cargo_valor_salario'];
-        }  
-        
-    }
-?>
-    <!--modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <form role="form" action="#" method="POST" class="f1">
-                        <h3>Cadastro de Funcionário</h3>
-                        <p>Preencha suas Informações</p>
-                        <div class="f1-steps">
-                            <div class="f1-progress">
-                                <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="2" style="width: 16.66%;"></div>
-                            </div>
-                            <div class="f1-step active">
-                                <div class="f1-step-icon">1</div>
-                            </div>
-                            <div class="f1-step">
-                                <div class="f1-step-icon">2</div>
-                            </div>
-                        </div>
+            $exibir=('select * from funcionario INNER JOIN cargo on funcionario.funcionario_cargo=cargo.cargo_id where funcionario_id='.$id.';');	
+            $result=mysqli_query($conexao,$exibir);
+            while($con=mysqli_fetch_array($result)){
+                $nome=$con['funcionario_nome'];
+                $email=$con['funcionario_email'];
+                $senha=$con['funcionario_senha'];
+                $carga_horaria=$con['cargo_carga_horaria'];
+                $cargo=$con['cargo_descricao'];
+                $salario=$con['cargo_valor_salario'];
+                $id_cargo=$con['funcionario_cargo'];
 
-                        <fieldset>
-                            <h4>Insira as informações do Funcionário:</h4>
-                           
-                        </fieldset>
-                        <fieldset>
-                            <h4>Digite as Especificações do Funcionário:</h4>
-                            
-                            <div class="f1-buttons">
-                                <button type="button" class="btn btn-previous">Anterior</button>
-                                <button type="submit" class="btn btn-submit" name="cadastrar">Cadastrar</button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+            }  
+            
+        }
+    ?>
     <div class="d-flex toggled" id="wrapper">
         <div class="border-right toggle" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
@@ -193,20 +155,20 @@
                 <div class="row">
                     <div class="col-12">
                         <h1 class="mt-5">Cadastro de Funcionário</h1>
-                        <form method="POST" action="#">   
+                        <form method="POST" class="needs-validation" action="#" novalidate>   
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label>Nome:</label>
-                                        <input type="text" id="txtNome" name="txtNome"  value="<?php echo $nome ?>" class="form-control" placeholder="Nome">  
+                                        <input type="text" id="txtNome" name="txtNome"  value="<?php echo $nome ?>" class="form-control" placeholder="Nome" required>  
                                     </div>
                                     <div class="col-4">
                                         <label>Email:</label>
-                                        <input type="email" id="txtEmail" name="txtEmail"  value="<?php echo $email ?>" class="form-control" placeholder="Email">      
+                                        <input type="email" id="txtEmail" name="txtEmail"  value="<?php echo $email ?>" class="form-control" placeholder="Email" required>      
                                     </div>  
                                     <div class="col-4">
                                         <label>Senha:</label>  
-                                        <input type="password" id="txtSenha" name="txtSenha" class="form-control" placeholder="Senha" data-mask-reverse="true" />
+                                        <input type="password" id="txtSenha" name="txtSenha" class="form-control" value="<?php echo $senha ?>" placeholder="Senha" required />
                                     </div>
                                 </div>
                             </div>
@@ -214,16 +176,16 @@
                                 <div class="form-row">
                                 <div class="col-5">
                                         <label>Cargo:</label>
-                                        <input type="text" id="txtCargo" name="txtCargo"  value="<?php echo $cargo ?>" class="form-control"  placeholder="Cargo" >
+                                        <input type="text" id="txtCargo" name="txtCargo"  value="<?php echo $cargo ?>" class="form-control"  placeholder="Cargo" required>
                                     </div> 
                                     <div class="col-2">
                                         <label>Carga Horaria:</label>
-                                        <input type="time" id="txtCargaHoraria" name="txtCargaHoraria"  value="<?php echo $carga_horaria ?>" class="form-control">
+                                        <input type="time" id="txtCargaHoraria" name="txtCargaHoraria"  value="<?php echo $carga_horaria ?>" class="form-control" required>
                                     </div>
                                     
                                     <div class="col-2">
                                         <label>Salario:</label>
-                                        <input type="number" id="txtSalario" name="txtSalario"  value="R$ <?php echo $salario ?>" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
+                                        <input type="number" id="txtSalario" name="txtSalario"  value="<?php echo $salario ?>" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01" required/>
                                     </div>
                                     <div class="col-2 mt-5">
                                         <a href="funcionario.php">Limpar</a>
@@ -245,7 +207,7 @@
 
                             include('conexao.php');
 
-                            $exibir=('select * from funcionario INNER JOIN cargo on funcionario.funcionario_id=cargo.cargo_id;');	
+                            $exibir=('select * from funcionario INNER JOIN cargo on funcionario.funcionario_cargo=cargo.cargo_id;');	
                             $result=mysqli_query($conexao,$exibir);
 
                             echo('<table class="table">
@@ -270,14 +232,14 @@
                                             echo('<td>'.$con['funcionario_nome'].'</td>');
                                             echo('<td>'.$con['funcionario_email'].'</td>');
                                             echo('<td>'.$con['cargo_descricao'].'</td>');
-                                            echo('<td>'.$con['cargo_valor_salario'].'</td>');
+                                            echo('<td>R$ '.$con['cargo_valor_salario'].'</td>');
                                             echo('<td>'.$con['cargo_carga_horaria'].'</td>');
                                             echo('<td>
                                                     <span class="table-edit"><a href="funcionario.php?id='.$con['funcionario_id'].'"><button type="button" class="btn btn-info btn-rounded btn-sm my-0"">Editar</button></a></span>
-                                                    </td>');
+                                                </td>');
                                             echo('<td>
-                                                    <span class="table-remove"><a href="funcionario.php?deletar='.$con['funcionario_id'].'">
-                                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                                    <span class="table-remove"><a href="funcionario.php?deletar='.$con['funcionario_id'].'&&deletarCargo='.$con['funcionario_cargo'].'">
+                                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></a></span>
                                                 </td> 
                                         </tr>
                                     </tbody>');
@@ -299,7 +261,6 @@
         <script src="js/jquery.mask.js" type="text/javascript"></script>
         <script src="js/jquery.backstretch.min.js"></script>
         <script src="js/retina-1.1.0.min.js"></script>
-        <script src="js/scripts.js"></script>
         <script src="js/bootstrap-notify.min.js" type="text/javascript"></script>
         <script type="text/javascript" language="javascript">
             (function() {
@@ -322,6 +283,18 @@
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });
+
+            function messageBox(type, message) {
+                $.notify({
+                    message: message
+                }, {
+                    type: type,
+                    placement: {
+                        from: "top",
+                        align: "center"
+                    },
+                });
+            }
         </script>
 
 <?php
@@ -339,7 +312,6 @@
 
         $verificar=mysqli_query($conexao,$sql_verificar);
 
-        echo $sql_verificar;
         $quant_registros=mysqli_num_rows($verificar);
 
 
@@ -361,8 +333,6 @@
             "'.$cargo.'",
             "'.$salario.'");');     
 
-            
-
             mysqli_query($conexao,$sql_inserir);
 
             $id=mysqli_insert_id($conexao);
@@ -380,7 +350,9 @@
             "'.$id.'");');      
 
             mysqli_query($conexao,$sql_inserir2);
-
+            
+            echo('<script> window.alert("Funcionário cadastrado com sucesso."); 
+            window.location="funcionario.php"; </script>');
             
         }
     }
@@ -398,7 +370,7 @@
         $sql_inserir=('update funcionario set funcionario_nome="'.$nome.'",funcionario_email="'.$email.'",funcionario_senha="'.$senha.'" where funcionario_id='.$id.';');     
         mysqli_query($conexao,$sql_inserir);
         
-        $sql_inserir2=('update cargo set cargo_carga_horaria="'.$carga_horaria.'",cargo_descricao="'.$cargo.'", cargo_valor_salario="'.$salario.'" where cargo_id='.$id.';');     
+        $sql_inserir2=('update cargo set cargo_carga_horaria="'.$carga_horaria.'",cargo_descricao="'.$cargo.'", cargo_valor_salario="'.$salario.'" where cargo_id='.$id_cargo.';');     
         mysqli_query($conexao,$sql_inserir2);
 
         echo '<script> window.alert("Editado com sucesso"); 
@@ -409,11 +381,12 @@
     {
 
         $codigo=$_GET['deletar'];
+        $codigoCargo=$_GET['deletarCargo'];
         $sql_excluir=('Delete from funcionario where funcionario_id='.$codigo.';');
 
         mysqli_query($conexao,$sql_excluir);
 
-        $sql_excluir=('Delete from cargo where cargo_id='.$codigo.';');
+        $sql_excluir=('Delete from cargo where cargo_id='.$codigoCargo.';');
 
         mysqli_query($conexao,$sql_excluir);
 
