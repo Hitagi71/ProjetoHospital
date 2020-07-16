@@ -41,9 +41,9 @@ create table EQUI_SALA(
 
 create table CARGO(
 	cargo_id int not null auto_increment primary key,
-	cargo_carga_horaria int not null,
+	cargo_carga_horaria varchar(6),
 	cargo_descricao varchar(50),
-	cargo_valor_salario int not null
+	cargo_valor_salario int(10)
 );
 
 create table PESSOA(
@@ -101,9 +101,7 @@ create table FUNCIONARIO(
 	funcionario_email varchar(30),
 	funcionario_senha varchar(20),
 	funcionario_cargo int not null,
-	funcionario_cod int,
-	foreign key (funcionario_cargo) references CARGO(cargo_id),
-	foreign key (funcionario_cod) references PESSOA(pessoa_id)
+	foreign key (funcionario_cargo) references CARGO(cargo_id)
 );
 
 create table TIPO_MEDIC(

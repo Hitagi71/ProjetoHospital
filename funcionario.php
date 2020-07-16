@@ -15,6 +15,33 @@
 
 <body>
 
+<?php
+    $id=null;
+    $nome="";
+    $email="";
+    $senha="";
+    $carga_horaria="";
+    $cargo="";
+    $salario="";
+
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        include('conexao.php');
+
+        
+        $exibir=('select * from funcionario INNER JOIN cargo on funcionario.funcionario_id=cargo.cargo_id where funcionario_id='.$id.';');	
+        $result=mysqli_query($conexao,$exibir);
+        while($con=mysqli_fetch_array($result)){
+            $nome=$con['funcionario_nome'];
+            $email=$con['funcionario_email'];
+            $senha=$con['funcionario_senha'];
+            $carga_horaria=$con['cargo_carga_horaria'];
+            $cargo=$con['cargo_descricao'];
+            $salario=$con['cargo_valor_salario'];
+        }  
+        
+    }
+?>
     <!--modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -165,17 +192,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="mt-5">Cadastro de Funcionario</h1>
+                        <h1 class="mt-5">Cadastro de Funcionário</h1>
                         <form>   
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-4">
                                         <label>Nome:</label>
-                                        <input type="text" id="txtNome" name="txtNome" class="form-control" placeholder="Nome">  
+                                        <input type="text" id="txtNome" name="txtNome"  value="<?php echo $nome ?>" class="form-control" placeholder="Nome">  
                                     </div>
                                     <div class="col-4">
                                         <label>Email:</label>
-                                        <input type="email" id="txtEmail" name="txtEmail" class="form-control" placeholder="Email">      
+                                        <input type="email" id="txtEmail" name="txtEmail"  value="<?php echo $email ?>" class="form-control" placeholder="Email">      
                                     </div>  
                                     <div class="col-4">
                                         <label>Senha:</label>  
@@ -187,64 +214,77 @@
                                 <div class="form-row">
                                 <div class="col-5">
                                         <label>Cargo:</label>
-                                        <input type="text" id="txtCargo" name="txtCargo" class="form-control"  placeholder="Cargo" >
+                                        <input type="text" id="txtCargo" name="txtCargo"  value="<?php echo $cargo ?>" class="form-control"  placeholder="Cargo" >
                                     </div> 
                                     <div class="col-2">
                                         <label>Carga Horaria:</label>
-                                        <input type="time" id="txtCargaHoraria" name="txtCargaHoraria" class="form-control">
+                                        <input type="time" id="txtCargaHoraria" name="txtCargaHoraria"  value="<?php echo $carga_horaria ?>" class="form-control">
                                     </div>
                                     
                                     <div class="col-2">
                                         <label>Salario:</label>
-                                        <input type="number" id="txtSalario" name="txtSalario" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
+                                        <input type="number" id="txtSalario" name="txtSalario"  value="<?php echo $salario ?>" class="form-control" placeholder="Salário" min="0.00" max="10000.00" step="0.01"/>
+                                    </div>
+                                    <div class="col-2 mt-5">
+                                        <a href="funcionario.php">Limpar</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="submit" value="Cadastrar"  name="cadastrar" class="btn btn-primary btn-lg btn-block"/>
+                                <?php
+                                    if($id==null || isset($_GET['tipo'])){
+                                        echo '<input type="submit" value="Cadastrar"  name="cadastrar" class="btn btn-primary btn-lg btn-block"/>';
+                                    }else{
+                                        echo '<input type="submit" value="Editar"  name="editar" class="btn btn-primary btn-lg btn-block"/>';
+                                    }
+                                ?>
                             </div>
                         </form>
-                        <table class="table">
-                            <thead class="thead-dark">
+
+                        <?php
+
+                            include('conexao.php');
+
+                            $exibir=('select * from funcionario INNER JOIN cargo on funcionario.funcionario_id=cargo.cargo_id;');	
+                            $result=mysqli_query($conexao,$exibir);
+
+                            echo('<table class="table">
+                                <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Cargo</th>
-                                    <th scope="col">Salario</th>
-                                    <th scope="col">Carga Horaria</th>
-                                    <th scope="col">Alterar</th>  
-                                    <th scope="col">Deletar</th>    
+                                    <th scope="col">Salário</th>
+                                    <th scope="col">Carga Horária</th>
+                                    <th scope="col">Editar</th>  
+                                    <th scope="col">Deletar</th>   
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                    /*include('conexao.php');
+                                </thead>');
 
-                                    $exibir=('select * from pessoa');	
-                                    $result=mysqli_query($conexao,$exibir);
+                            while($con=mysqli_fetch_array($result))
+			                {
+                                echo('<tbody
+                                        <tr>
+                                            <th scope="row">'.$con['funcionario_id'].'</th>');
+                                            echo('<td>'.$con['funcionario_nome'].'</td>');
+                                            echo('<td>'.$con['funcionario_email'].'</td>');
+                                            echo('<td>'.$con['cargo_descricao'].'</td>');
+                                            echo('<td>'.$con['cargo_valor_salario'].'</td>');
+                                            echo('<td>'.$con['cargo_carga_horaria'].'</td>');
+                                            echo('<td>
+                                                    <span class="table-edit"><a href="funcionario.php?id='.$con['funcionario_id'].'"><button type="button" class="btn btn-info btn-rounded btn-sm my-0"">Editar</button></a></span>
+                                                    </td>');
+                                            echo('<td>
+                                                    <span class="table-remove"><a href="funcionario.php?deletar='.$con['funcionario_id'].'">
+                                                    <button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Deletar</button></span>
+                                                </td> 
+                                        </tr>
+                                    </tbody>');
+                                
+                            }
+                        ?>
 
-                                    while($con=mysqli_fetch_array($result)){
-                                        echo('<tbody
-                                                <tr>
-                                                    <th scope="row">'.$con['pessoa_id'].'</th>');
-                                                        echo('<td>'.$con['pessoa_nome'].'</td>');
-                                                        echo('<td>'.$con['pessoa_rg'].'</td>');
-                                                        echo('<td>'.$con['pessoa_cpf'].'</td>');
-                                                        echo('<td>'.$con['pessoa_sexo'].'</td>');
-                                                         echo('<td>'.date("d/m/Y",strtotime($con['pessoa_data_nasc'])).'</td>');
-                                                         echo('<td>
-                                                                <span class="table-edit"><a href="pacientes.php?id='.$con['pessoa_id'].'"><button type="button" class="btn btn-info btn-rounded btn-sm my-0"">Editar</button></a></span>
-                                                                </td>');
-                                                        echo('<td>
-                                                                <span class="table-remove"><a href="pacientes.php?id='.$con['pessoa_id'].'&&tipo=excluir"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Excluir</button></a></span>
-                                                            </td> 
-                                                </tr>
-                                            </tbody>');
-                                        }*/
-                                    ?>
-                            </tbody>
-                        </table>  
                     </div>
                 </div>
             </div>
@@ -285,12 +325,11 @@
         </script>
 
 <?php
-    include('conexao.php');
 
     if(isset($_POST['cadastrar']))
     {
         $nome=ucwords(strtolower(trim($_POST['txtNome'])));
-        $email=ucfirst(strtolower(trim($_POST['txtEmail'])));
+        $email=strtolower(trim($_POST['txtEmail']));
         $senha=strtolower(trim($_POST['txtSenha']));
         $carga_horaria=trim($_POST['txtCargaHoraria']);
         $cargo=ucwords(strtolower(trim($_POST['txtCargo'])));
@@ -342,6 +381,42 @@
             echo('<script> window.alert("Cadastrado com sucesso"); 
                     window.location="funcionario.php"; </script>');
         }
+    }
+
+    if(isset($_POST['editar']))
+    {
+        
+        $nome=ucwords(strtolower(trim($_POST['txtNome'])));
+        $email=strtolower(trim($_POST['txtEmail']));
+        $senha=strtolower(trim($_POST['txtSenha']));
+        $carga_horaria=trim($_POST['txtCargaHoraria']);
+        $cargo=ucwords(strtolower(trim($_POST['txtCargo'])));
+        $salario=trim($_POST['txtSalario']);
+
+        $sql_inserir=('update funcionario set funcionario_nome="'.$nome.'",funcionario_email="'.$email.'",funcionario_senha="'.$senha.'" where funcionario_id='.$id.'');     
+        mysqli_query($conexao,$sql_inserir);
+        
+        $sql_inserir2=('update cargo set cargo_carga_horaria="'.$carga_horaria.'",cargo_descricao="'.$cargo.'", carga_valor_salario="'.$salario.'" where cargo_id='.$id);     
+        mysqli_query($conexao,$sql_inserir2);
+
+        echo '<script> window.alert("Editado com sucesso"); 
+        window.location="funcionario.php"; </script>;';
+    }
+
+    if(isset($_GET['deletar']))
+    {
+
+        $codigo=$_GET['deletar'];
+        $sql_excluir=('Delete from funcionario where funcionario_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        $sql_excluir=('Delete from cargo where cargo_id='.$codigo.';');
+
+        mysqli_query($conexao,$sql_excluir);
+
+        echo('<script> window.alert("Excluído com sucesso"); 
+                    window.location="funcionario.php"; </script>');
     }
 ?>
 </body>
